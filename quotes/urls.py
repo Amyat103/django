@@ -10,4 +10,7 @@ from . import views
 # URL pattern specific to the quotes app
 urlpatterns = [
     path(r"", views.home, name="home"),
+    path(r"quotes/", views.quotes, name="quotes"),
+    path(r"show_all/", views.show_all, name="show_all"),
+    path(r"about/", views.about, name="about"),
 ]

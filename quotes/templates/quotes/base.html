@@ -1,0 +1,25 @@
+<!-- # File: quotes/templates/quotes/base.html -->
+<!-- # Author: David Myat (amyat@bu.edu), 9/9/2025 -->
+<!-- # Description: Base template for quotes project -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Hello, world!</title>
+        <!-- <link rel="stylesheet" href="{% static 'styles.css' %}"> -->
+    </head>
+    <body>
+        <!-- <nav>
+            <li><a href="{% url 'home_page' %}">Home</a></li>
+            <li><a href="{% url 'about_page' %}">About</a></li>
+        </nav> -->
+
+        <!-- put page specific content here -->
+         {% block content %}
+         {% endblock %}
+    </body>
+    <footer>
+        Footer
+        <!-- The current time is {{time}} -->
+    </footer>
+</html>
