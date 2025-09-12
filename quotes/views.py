@@ -16,7 +16,7 @@ quotes = [
 images = [
     "https://images.gr-assets.com/photos/1375466820p8/817846.jpg",
     "https://images.gr-assets.com/authors/1673611182p8/3565.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/9/9c/Oscar_Wilde_portrait.jpg",
+    "https://culturehoney.s3.us-west-1.amazonaws.com/wp-content/uploads/2019/06/21223032/oscar-wilde.jpg",
 ]
 
 

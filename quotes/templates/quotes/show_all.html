@@ -5,7 +5,14 @@
     <div class="quote-container">
         <h1>All Quotes</h1>
         <ul>
-            <li>{{quotes}}</li>
+            {% for quote in quotes %}
+            <li>{{quote}}</li>
+            {% endfor %}
+        </ul>
+        <ul class="image-list">
+            {% for image in images %}
+            <li><img src={{image}} alt="image of Oscar Wilde"></img></li>
+            {% endfor %}
         </ul>
     </div>
 
