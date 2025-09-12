@@ -42,8 +42,9 @@ header {
 footer {
     width: 100%;
     background:aliceblue;
-    position: fixed;
     bottom: 0px;
+    text-align: center;
+    position: fixed; 
 }
 
 
@@ -211,11 +212,6 @@ nav button {
     gap: 20px;
 }
 
-/* styling nav in base page */
-nav {
-    text-align: left;
-}
-
 /* keep image from internet consistent */
 div img {
     max-width: 60%;
@@ -225,8 +221,6 @@ div img {
 
 /* styling only for quotes page body */
 .quotes-page-body {
-    /* remove scrolling */
-    max-height: 100vh;
     background-color: aliceblue;
 }
 

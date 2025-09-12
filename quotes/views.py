@@ -9,9 +9,10 @@ from django.shortcuts import render
 
 # Global variables for views.py
 quotes = [
-    "If one cannot enjoy reading a book over and over again, there is no use in reading it at all.",
-    "We are all in the gutter, but some of us are looking at the stars.",
-    "To live is the rarest thing in the world. Most people exist, that is all.",
+    '"If one cannot enjoy reading a book over and over again, there is no use in reading it at all."',
+    '"We are all in the gutter, but some of us are looking at the stars."',
+    '"To live is the rarest thing in the world. Most people exist, that is all."',
+    '"I am so clever that sometimes I don\'t understand a single word of what I am saying."',
 ]
 images = [
     "https://images.gr-assets.com/photos/1375466820p8/817846.jpg",
