@@ -26,7 +26,10 @@ SECRET_KEY = "django-insecure-tukc34vj$6fsg&p(lw8o(_mejw+%=1vd3av%g5ict#8+rhixvl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "*",
+    "cs-webapps.bu.edu",
+]
 
 
 # Application definition
@@ -131,3 +134,15 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+# for bu webapps deployment
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_URL = "media/"  # note: no leading slash!
+
+import socket
+
+CS_DEPLOYMENT_HOSTNAME = "cs-webapps.bu.edu"
+
+if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
+    STATIC_URL = "/amyat/static/"
+    MEDIA_URL = "/amyat/media/"

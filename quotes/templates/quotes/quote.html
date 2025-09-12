@@ -1,0 +1,11 @@
+<!-- quotes/templates/quotes/quote.html -->
+{% extends 'quotes/base.html' %}
+
+    {% block content %}
+    <div class="quote-container">
+        <h1>Oscar Wilde's Quote</h1>
+        <img src={{random_image}} alt="image of Oscar Wilde" height="60%"></img>
+        <h2>{{random_quote}}</h2>
+    </div>
+
+    {% endblock %}

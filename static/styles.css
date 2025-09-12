@@ -199,6 +199,15 @@ nav button {
     padding: 0px;
 }
 
+/* CSS for /quotes/quote div container */
+.quote-container {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    margin: 0 auto;
+}
 
 /* responsive styles when width is less than 1400px */
 @media screen and (max-width: 560px) {
