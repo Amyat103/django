@@ -42,8 +42,9 @@ header {
 footer {
     width: 100%;
     background:aliceblue;
-    position: fixed;
     bottom: 0px;
+    text-align: center;
+    position: fixed; 
 }
 
 
@@ -202,12 +203,47 @@ nav button {
 /* CSS for /quotes/quote div container */
 .quote-container {
     display: flex;
+    flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
     width: 70vw;
     margin: 0 auto;
+    gap: 20px;
 }
+
+/* keep image from internet consistent */
+div img {
+    max-width: 60%;
+    min-width: 60%;
+    max-height: 60%;
+}
+
+/* styling only for quotes page body */
+.quotes-page-body {
+    background-color: aliceblue;
+}
+
+/* style for each quote in show_all page */
+.quote-container ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+/* style for images and image container in show_all page */
+.quote-container .image-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.quote-container .image-list img {
+    max-height: 200px;
+    min-height: 100px;
+}
+
 
 /* responsive styles when width is less than 1400px */
 @media screen and (max-width: 560px) {
