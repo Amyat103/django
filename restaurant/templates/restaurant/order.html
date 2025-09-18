@@ -12,27 +12,27 @@
             <div class="form_category_container">
                 <h3><strong>Select your items:</strong></h3>
                 <div>
-                    <input type="checkbox" name="shrimp" value="shrimp">
+                    <input type="checkbox" name="seafood" value="shrimp">
                     <label for="shrimp">Shrimp 1 lb <strong>$16</strong></label>
                 </div>
 
                 <div>
-                    <input type="checkbox" name="king_crab" value="king_crab">
+                    <input type="checkbox" name="seafood" value="king_crab">
                     <label for="king_crab">King Crab 1 lb <strong>$95</strong></label>
                 </div>
 
                 <div>
-                    <input type="checkbox" name="clams" value="clams">
+                    <input type="checkbox" name="seafood" value="clams">
                     <label for="clams">clams 1 lb <strong>$19</strong></label>
                 </div>
 
                 <div>
-                    <input type="checkbox" name="dungeness_crab" value="dungeness_crab">
+                    <input type="checkbox" name="seafood" value="dungeness_crab">
                     <label for="dungeness_crab">Dungeness Crab 1 lb <strong>$35</strong></label>
                 </div>
 
                 <div>
-                    <input type="checkbox" name="snow_crab" value="snow_crab">
+                    <input type="checkbox" name="seafood" value="snow_crab">
                     <label for="snow_crab">Snow Crab 1 lb <strong>$45</strong></label>
                 </div>
             </div>
@@ -40,8 +40,8 @@
             <div class="form_category_container">
                 <h3><strong>Today's Special:</strong></h3>
                 <div>
-                    <input type="checkbox" name="{{daily_special}}" value="{{daily_special}}">
-                    <label for="{{daily_special}}">{{daily_special}}</label>
+                    <input type="checkbox" name="daily_special" value="{{daily_special}}">
+                    <label for="{{daily_special}}">{{daily_special}} <strong>$50</strong></label>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                 <h3><strong>Select Your Flavors:</strong></h3>
                 <div>
                     <strong>Sauce:</strong>
-                    <input type="radio" name="sauce" value="cajun">
+                    <input type="radio" name="sauce" value="cajun" required>
                     <label for="cajun">Cajun</label>
                     <input type="radio" name="sauce" value="lemon_pepper">
                     <label for="lemon_pepper">Lemon Pepper</label>
@@ -59,13 +59,13 @@
                 </div>
                 <div>
                     <strong>Spice Level:</strong>
-                    <input type="radio" name="spice_level" value="mild"> Mild
+                    <input type="radio" name="spice_level" value="MILD" required>
                     <label for="mild">Mild</label>
-                    <input type="radio" name="spice_level" value="medium">
+                    <input type="radio" name="spice_level" value="MEDIUM">
                     <label for="medium">Medium</label>
-                    <input type="radio" name="spice_level" value="hot">
+                    <input type="radio" name="spice_level" value="HOT">
                     <label for="hot">Hot</label>
-                    <input type="radio" name="spice_level" value="xxx">
+                    <input type="radio" name="spice_level" value="XXX">
                     <label for="xxx">XXX</label>
                 </div>
             </div>
@@ -75,13 +75,13 @@
                 <h3><strong>Your Contact Info:</strong></h3>
                 <!-- wrapped each one in div for flex column styling -->
                 <div>
-                    Name: <input type="text" name="name">
+                    Name: <input type="text" name="name" required>
                 </div>
                 <div>
-                    Email: <input type="text" name="favorite">
+                    Email: <input type="text" name="email" required>
                 </div>
                 <div>
-                    Phone: <input type="number" name="phone">
+                    Phone: <input type="number" name="phone" required>
                 </div>
             </div>
             <div class="form_category_container">

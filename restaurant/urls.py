@@ -13,5 +13,4 @@ urlpatterns = [
     path(r"main/", views.main, name="main_page"),
     path(r"order/", views.order, name="order_page"),
     path(r"submit/", views.submit, name="submit"),
-    path(r"confirmation/", views.confirmation, name="confirmation_page"),
 ]

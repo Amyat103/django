@@ -289,6 +289,25 @@ div img {
     flex-basis: 1;
 }
 
+.confirmation-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.confirmation-page ul {
+    list-style-type: none;
+}
+
+.confirmation-page * {
+    margin-bottom: 10px;
+}
+
+.restaurant-confirm-title {
+    color: black
+}
+
 
 
 /* responsive styles when width is less than 1400px */

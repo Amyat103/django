@@ -1,0 +1,39 @@
+<!-- restaurant/templates/restaurant/confirmation.html -->
+{% extends 'restaurant/base.html' %}
+
+    {% block content %}
+    <div class="restaurant-container confirmation-page">
+        <h1>Order Confirmation - Thank You!</h1>
+        <p>
+            <h3 class="restaurant-confirm-title" ><strong>Your order will be ready in {{ready_time}}</strong></h3>
+            <div>
+                <h3><strong>Seafood Ordered:</strong></h3>
+                <ul>
+                    <!-- loop through the list and build -->
+                    {% for item in seafood %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                    {% if daily_special %}
+                        <li>{{ daily_special }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div>
+                <h3><strong>Sauce and Spice:</strong></h3>
+                <p>Sauce: {{ sauce }}</p>
+                <p>Spice Level: {{ spice_level }}</p>
+            </div>
+            <div>
+                <h3><strong>Your Info:</strong></h3>
+                <p>Name: {{ name }}</p>
+                <p>Email: {{ email }}</p>
+                <p>Phone: {{ phone }}</p>
+            </div>
+            <div>
+                <h2><strong>Total Price:</strong></h2>
+                <h2><strong>${{ total_price }}</strong></h2>
+            </div>
+        </p>
+    </div>
+
+    {% endblock %}

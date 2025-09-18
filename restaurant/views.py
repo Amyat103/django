@@ -1,4 +1,5 @@
 import random
+from datetime import datetime, timedelta
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -43,12 +44,78 @@ def order(request):
 def submit(request):
     """Process the order submission, and generate a result."""
 
-    print(request)
-    return HttpResponse("")
-
-
-def confirmation(request):
-    """Function to respond to "confirmation" request."""
-
     template_name = "restaurant/confirmation.html"
-    return render(request, template_name)
+
+    # map to original name with spaces
+    names = {
+        "shrimp": "Shrimp",
+        "king_crab": "King Crab",
+        "clams": "Clams",
+        "dungeness_crab": "Dungeness Crab",
+        "snow_crab": "Snow Crab",
+    }
+
+    # map prices to seafood for calc
+    prices = {
+        "shrimp": 16,
+        "king_crab": 95,
+        "clams": 19,
+        "dungeness_crab": 35,
+        "snow_crab": 45,
+    }
+
+    # to map sauce names for confirmation page
+    sauces_names = {
+        "the_whole_shabang": "The Whole Shabang",
+        "cajun": "Cajun",
+        "lemon_pepper": "Lemon Pepper",
+    }
+
+    if request.POST:
+        seafood = request.POST.getlist("seafood")
+        daily_special = request.POST["daily_special"]
+        sauce = sauces_names[request.POST["sauce"]]
+        spice_level = request.POST["spice_level"]
+        name = request.POST["name"]
+        email = request.POST["email"]
+        phone = request.POST["phone"]
+
+    # calculate total price and add 50 if daily special exists
+    total_price = 0
+    for order in seafood:
+        total_price += prices[order]
+
+    if daily_special:
+        total_price += 50
+
+    # map and add to list with formatted names
+    seafood_orders = []
+    for order in seafood:
+        format_name = names[order]
+        seafood_orders.append(format_name)
+
+    # calculate ready time with random
+    curr_time = datetime.now()
+    random_min = random.randint(30, 60)
+    ready_time = curr_time + timedelta(minutes=random_min)
+
+    context = {
+        "seafood": seafood_orders,
+        "daily_special": daily_special,
+        "sauce": sauce,
+        "spice_level": spice_level,
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "total_price": total_price,
+        "ready_time": ready_time,
+    }
+
+    return render(request, template_name, context)
+
+
+# def confirmation(request):
+#     """Function to respond to "confirmation" request."""
+
+#     template_name = "restaurant/confirmation.html"
+#     return render(request, template_name)
