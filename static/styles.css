@@ -22,10 +22,9 @@ a:hover {
     /* font-weight: bold; */
 }
 
-body {
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 20px auto;
+body html {
+    max-width: 70vw;
+    /* padding: 20px auto; */
 }
 
 header {
@@ -161,21 +160,21 @@ nav button {
 }
 
 /* style the forms with class site-form */
-.site-form input, .site-form textarea, .site-form select {
+/* .site-form input, .site-form textarea, .site-form select {
     display: block;
     margin: 5px 0 0 0;
     padding: 5px;
-}
+} */
 
 /* style the submit button ; didn't quite work?? */
-.site-form input [type="submit"] {
+/* .site-form input [type="submit"] {
     background: slategray;
     border: 0;
     color: fff;
     font-size: 1.2em;
     border-radius: 4px;
     margin: 5px 0;
-}
+} */
 
 
 /* style the help text in the forms */
@@ -232,6 +231,11 @@ div img {
     gap: 20px
 }
 
+/* styling restaurant base body */
+.restaurant-body {
+    background-color: aliceblue;
+}
+
 /* style for images and image container in show_all page */
 .quote-container .image-list {
     display: flex;
@@ -243,6 +247,48 @@ div img {
     max-height: 200px;
     min-height: 100px;
 }
+
+/* style for general restaurant divs */
+.restaurant-container img {
+    min-height: 450px;
+    min-width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.restaurant-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.restaurant_form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form_category_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.restaurant-container.homepage {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.left-homepage {
+    flex-basis: 2;
+}
+
+.right-homepage {
+    flex-basis: 1;
+}
+
 
 
 /* responsive styles when width is less than 1400px */

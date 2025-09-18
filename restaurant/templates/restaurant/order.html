@@ -1,0 +1,97 @@
+<!-- restaurant/templates/restaurant/order.html -->
+{% extends 'restaurant/base.html' %}
+
+    {% block content %}
+    <div class="restaurant-container">
+        <h2><strong>Order</strong></h2>
+
+        <form action="{% url 'submit' %}" method="POST" class="restaurant_form">
+            {% csrf_token %}
+
+            <!-- select items with checkboxes -->
+            <div class="form_category_container">
+                <h3><strong>Select your items:</strong></h3>
+                <div>
+                    <input type="checkbox" name="shrimp" value="shrimp">
+                    <label for="shrimp">Shrimp 1 lb <strong>$16</strong></label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="king_crab" value="king_crab">
+                    <label for="king_crab">King Crab 1 lb <strong>$95</strong></label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="clams" value="clams">
+                    <label for="clams">clams 1 lb <strong>$19</strong></label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="dungeness_crab" value="dungeness_crab">
+                    <label for="dungeness_crab">Dungeness Crab 1 lb <strong>$35</strong></label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="snow_crab" value="snow_crab">
+                    <label for="snow_crab">Snow Crab 1 lb <strong>$45</strong></label>
+                </div>
+            </div>
+
+            <div class="form_category_container">
+                <h3><strong>Today's Special:</strong></h3>
+                <div>
+                    <input type="checkbox" name="{{daily_special}}" value="{{daily_special}}">
+                    <label for="{{daily_special}}">{{daily_special}}</label>
+                </div>
+            </div>
+
+            <div class="form_category_container">
+                <!-- flavor and spice select with radio for 1 choice -->
+                <h3><strong>Select Your Flavors:</strong></h3>
+                <div>
+                    <strong>Sauce:</strong>
+                    <input type="radio" name="sauce" value="cajun">
+                    <label for="cajun">Cajun</label>
+                    <input type="radio" name="sauce" value="lemon_pepper">
+                    <label for="lemon_pepper">Lemon Pepper</label>
+                    <input type="radio" name="sauce" value="the_whole_shabang">
+                    <label for="the_whole_shabang">The Whole Shabang</label>
+                </div>
+                <div>
+                    <strong>Spice Level:</strong>
+                    <input type="radio" name="spice_level" value="mild"> Mild
+                    <label for="mild">Mild</label>
+                    <input type="radio" name="spice_level" value="medium">
+                    <label for="medium">Medium</label>
+                    <input type="radio" name="spice_level" value="hot">
+                    <label for="hot">Hot</label>
+                    <input type="radio" name="spice_level" value="xxx">
+                    <label for="xxx">XXX</label>
+                </div>
+            </div>
+
+            <div class="form_category_container">
+                <!-- customer's info to contact -->
+                <h3><strong>Your Contact Info:</strong></h3>
+                <!-- wrapped each one in div for flex column styling -->
+                <div>
+                    Name: <input type="text" name="name">
+                </div>
+                <div>
+                    Email: <input type="text" name="favorite">
+                </div>
+                <div>
+                    Phone: <input type="number" name="phone">
+                </div>
+            </div>
+            <div class="form_category_container">
+                <!-- to submit the form -->
+                <h3><strong>Submit</strong></h3>
+                <div>
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% endblock %}

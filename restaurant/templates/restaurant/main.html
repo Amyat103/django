@@ -1,0 +1,28 @@
+<!-- restaurant/templates/restaurant/main.html -->
+{% extends 'restaurant/base.html' %}
+
+    {% block content %}
+    <div class="restaurant-container homepage">
+        <div class="left-homepage">
+            <h2>Welcome!!</h2>
+            <div>
+                <img src={{restaurant_img}} alt="image of Boiling Crab - Cambridge"></img>
+            </div>
+        </div>
+        <div class="right-homepage">
+            <h3>
+                Welcome to <b>The Boiling Crab,</b> Boston's best seafood boil!
+            </h3>
+            <ul>
+                <li>
+                    Location: 96 Winthrop St, Cambridge, MA
+                </li>
+                <li>
+                    Hours: 
+                    3 - 10 pm weekdays | 12 : 10 pm weekend
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% endblock %}

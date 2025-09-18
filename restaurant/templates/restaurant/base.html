@@ -1,0 +1,24 @@
+<!-- # File: restaurant/templates/restaurant/base.html -->
+<!-- # Author: David Myat (amyat@bu.edu), 9/16/2025 -->
+<!-- # Description: Base template for restaurant project -->
+
+{% load static %}
+<html>
+    <head>
+        <title>The Boiling Crab - Cambridge</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body class="restaurant-body">
+        <h1>The Boiling Crab</h1>
+        <nav>
+            <li><a href="{% url 'main_page' %}">Home</a></li>
+            <li><a href="{% url 'order_page' %}">Order</a></li>
+        </nav>
+
+         {% block content %}
+         {% endblock %}
+    </body>
+    <footer>
+        Page created by David Myat - CS 412
+    </footer>
+</html>
