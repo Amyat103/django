@@ -22,6 +22,10 @@
                 <h3><strong>Sauce and Spice:</strong></h3>
                 <p>Sauce: {{ sauce }}</p>
                 <p>Spice Level: {{ spice_level }}</p>
+                {% if special_requests %}
+                    <h3><strong>Special Requests:</strong></h3>
+                    <p>{{ special_requests }}</p>
+                {% endif %}
             </div>
             <div>
                 <h3><strong>Your Info:</strong></h3>

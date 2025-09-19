@@ -79,6 +79,7 @@ def submit(request):
         name = request.POST["name"]
         email = request.POST["email"]
         phone = request.POST["phone"]
+        special_requests = request.POST.get("special_requests")
 
     # calculate total price and add 50 if daily special exists
     total_price = 0
@@ -109,6 +110,7 @@ def submit(request):
         "phone": phone,
         "total_price": total_price,
         "ready_time": ready_time,
+        "special_requests": special_requests,
     }
 
     return render(request, template_name, context)
