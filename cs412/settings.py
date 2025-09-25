@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "hw",
     "quotes",
     "restaurant",
+    "mini_insta",
 ]
 
 MIDDLEWARE = [
