@@ -1,0 +1,21 @@
+<!-- mini_insta/templates/mini_insta/base.html -->
+<!-- Author: David Myat (amyat@bu.edu), 9/25/2025 -->
+<!-- Description: Base template for the mini_insta app -->
+{% load static %}
+
+<html>
+    <head>
+        <title>Mini Insta</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <head>
+            <h1>Mini Insta</h1>
+        </head>
+        {% block content %}
+        {% endblock %}
+    </body>
+    <footer>
+        Page created by David Myat - CS 412
+    </footer>
+</html>

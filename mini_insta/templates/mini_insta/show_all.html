@@ -1,0 +1,16 @@
+<!-- mini_insta/templates/mini_insta/show_all.html -->
+<!-- Author: David Myat (amyat@bu.edu), 9/25/2025 -->
+<!-- Description: Show all profiles in the mini_insta app -->
+
+<h1>Showing All Profiles</h1>
+
+<div>
+    {% for profile in profiles %}
+        <div>
+            <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image" width="250px" height="200px"/>
+            <h2>{{ profile.display_name }}</h2>
+        </div>
+    {% endfor %}
+</div>
+
+
