@@ -24,19 +24,3 @@ class ProfileDetailView(DetailView):
     model = Profile
     template_name = "mini_insta/show_profile.html"
     context_object_name = "profile"
-
-
-class RandomProfileView(DetailView):
-    """Display a single random profile."""
-
-    model = Profile
-    template_name = "mini_insta/random_profile.html"
-    context_object_name = "profile"
-
-    # method
-    def get_object(self):
-        """return one of the profile at random."""
-
-        all_profiles = Profile.objects.all()
-        profile = random.choice(all_profiles)
-        return profile

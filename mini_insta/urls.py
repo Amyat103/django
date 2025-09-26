@@ -11,6 +11,6 @@ from .views import ProfileDetailView, ProfileListView
 # URL pattern specific to the restaurant app
 urlpatterns = [
     path("", ProfileListView.as_view(), name="show_all_profiles"),
-    path("/mini_insta/", ProfileListView.as_view(), name="show_all_profiles"),
+    path("mini_insta/", ProfileListView.as_view(), name="show_all_profiles"),
     path("profile/<int:pk>/", ProfileDetailView.as_view(), name="profile"),
 ]
