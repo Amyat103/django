@@ -46,9 +46,12 @@ article.featured {
 }
 
 article img, article.featured img {
-    width: 100%;
+    /* width: 100%; */
     border: 4px solid #fff;
     border-radius: 8px;
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
 }
 article p, article h3 {
     margin: 20px 10px;
@@ -58,6 +61,14 @@ article p, article h3 {
 nav li {
     display: inline;
 }
+
+footer {
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+    position: fixed; 
+}
+
 /* responsive styles: adapt to smaller screen sizes */
 @media screen and (max-width: 980px) {
 
