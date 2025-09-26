@@ -6,9 +6,10 @@ from django.conf import settings
 from django.urls import path
 
 from . import views
-from .views import ShowAllView
+from .views import ProfileView, ShowAllView
 
 # URL pattern specific to the restaurant app
 urlpatterns = [
     path("", ShowAllView.as_view(), name="show_all"),
+    path("profile/<int:pk>/", ProfileView.as_view(), name="profile"),
 ]

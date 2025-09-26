@@ -1,0 +1,26 @@
+<!-- mini_insta/templates/mini_insta/profile.html -->
+<!-- Author: David Myat (amyat@bu.edu), 9/25/2025 -->
+<!-- Description: Show one profile in the mini_insta app -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Profile: {{ profile.username }}</h1>
+
+<main class="grid-container">
+        <article>
+            <div>
+                <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
+                <h2>{{ profile.display_name }}</h2>
+            </div>
+            <div>
+                <div>
+                    <h3>Bio:</h3>
+                    <p>{{ profile.bio_text }}</p>
+                </div>
+                <p>Joined Date: {{ profile.joined_date }}</p>
+            </div>
+        </article>
+</main>
+
+{% endblock %}
