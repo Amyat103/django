@@ -10,19 +10,19 @@ from .models import Profile
 
 
 # Create your views here.
-class ShowAllView(ListView):
+class ProfileListView(ListView):
     """Define a view class to show all profiles"""
 
     model = Profile
-    template_name = "mini_insta/show_all.html"
+    template_name = "mini_insta/show_all_profiles.html"
     context_object_name = "profiles"
 
 
-class ProfileView(DetailView):
+class ProfileDetailView(DetailView):
     """Display a single profile."""
 
     model = Profile
-    template_name = "mini_insta/profile.html"
+    template_name = "mini_insta/show_profile.html"
     context_object_name = "profile"
 
 

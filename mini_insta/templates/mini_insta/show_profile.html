@@ -8,17 +8,17 @@
 <h1>Profile: {{ profile.username }}</h1>
 
 <main class="grid-container">
-        <article>
+        <article class="show_profile">
             <div>
-                <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
                 <h2>{{ profile.display_name }}</h2>
+                <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
             </div>
             <div>
-                <div>
+                <div class="bio">
                     <h3>Bio:</h3>
-                    <p>{{ profile.bio_text }}</p>
+                    <!-- take in bio_text and also linebreaks -->
+                    <p>{{ profile.bio_text|linebreaks }}</p>
                 </div>
-                <p>Joined Date: {{ profile.joined_date }}</p>
             </div>
         </article>
 </main>

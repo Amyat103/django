@@ -1,7 +1,6 @@
 /* This CSS was derived from NetNinja's multi-column grid example. */
 
 body {
-    margin: 30px;
     background: #d1dedd;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -9,6 +8,10 @@ body {
 ul, li {
     padding: 0px;
     list-style-type: none;
+}
+
+h1 {
+    margin: 10px;
 }
 
 h1, h2, h3 {
@@ -21,18 +24,18 @@ p {
 
 header {
     max-width: 1200px;
-    margin: 40px auto;
     border-bottom: 1px solid #bbc7c7;
+    gap: 40px;
+    align-items: center;
 }
+
 .grid-container {
     background: #eee;
     max-width: 900px;
     display: grid;
     /* grid-template-columns: 300px 300px 300px; */
     grid-template-columns: repeat(3, 1fr);
-     grid-gap: 10px;
     max-width: 1200px;
-    margin: 20px auto;
 }
 
 article.featured {
@@ -62,11 +65,50 @@ nav li {
     display: inline;
 }
 
+nav a {
+    color: #828b82;
+    font-size: 22px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
 footer {
     width: 100%;
     bottom: 0px;
     text-align: center;
     position: fixed; 
+}
+
+.show_profile img {
+    height: 400px;
+    width: 600px;
+    object-fit: cover;
+}
+
+.show_profile {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.bio {
+    size: 20px;
+    width: 400px;
+}
+
+.base_header {
+    display: flex;
+    flex-direction: row;
+}
+
+/* center all child */
+.show_profile > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* responsive styles: adapt to smaller screen sizes */

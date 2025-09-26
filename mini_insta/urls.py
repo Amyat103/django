@@ -6,10 +6,11 @@ from django.conf import settings
 from django.urls import path
 
 from . import views
-from .views import ProfileView, ShowAllView
+from .views import ProfileDetailView, ProfileListView
 
 # URL pattern specific to the restaurant app
 urlpatterns = [
-    path("", ShowAllView.as_view(), name="show_all"),
-    path("profile/<int:pk>/", ProfileView.as_view(), name="profile"),
+    path("", ProfileListView.as_view(), name="show_all_profiles"),
+    path("/mini_insta/", ProfileListView.as_view(), name="show_all_profiles"),
+    path("profile/<int:pk>/", ProfileDetailView.as_view(), name="profile"),
 ]
