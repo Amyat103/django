@@ -19,3 +19,29 @@ class Profile(models.Model):
     def __str__(self):
         """return string representation of Profile object"""
         return f"{self.username} | {self.display_name}"
+
+
+class Post(models.Model):
+    """Encapsulate data of a post made by a user"""
+
+    # define data attributes of the Post model
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    caption = models.TextField(blank=True)
+
+    def __str__(self):
+        """return string representation of Post object"""
+        return f"Posted by {self.profile.username} | {self.timestamp}"
+
+
+class Photo(models.Model):
+    """Encapsulate data of a photo in a post"""
+
+    # define data attributes of the Photo model
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image_url = models.URLField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """return string representation of Photo object"""
+        return f"Photo posted by {self.post.profile.username} | {self.timestamp}"
