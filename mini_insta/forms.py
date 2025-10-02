@@ -1,9 +1,9 @@
-# File: mini_insta/models.py
-# Author: David Myat (amyat@bu.edu), 9/25/2025
-# Description: Define data models for the mini_insta project
+# File: mini_insta/forms.py
+# Author: David Myat (amyat@bu.edu), 9/30/2025
+# Description: Define forms for the mini_insta project
 from django import forms
 
-from .models import Profile
+from .models import *
 
 
 class CreatePostForm(forms.ModelForm):
@@ -12,4 +12,5 @@ class CreatePostForm(forms.ModelForm):
     class Meta:
         """Associate this form with a model from our database."""
 
-        model = Profile
+        model = Post
+        fields = ["profile", "caption"]

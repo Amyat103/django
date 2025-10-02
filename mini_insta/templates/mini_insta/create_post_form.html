@@ -1,0 +1,19 @@
+<!-- mini_insta/templates/mini_insta/create_post_form.html -->
+<!-- Author: David Myat (amyat@bu.edu), 9/25/2025 -->
+<!-- Description: Form to create a new post -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+<h1>Create a new Post</h1>
+
+
+<form action="{% url 'create_post' %}" method="POST">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+    </table>
+
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
