@@ -5,6 +5,8 @@ from django.contrib import admin
 
 # Register your models here.
 # import Profile and register to admin
-from .models import Profile
+from .models import Photo, Post, Profile
 
 admin.site.register(Profile)
+admin.site.register(Post)
+admin.site.register(Photo)

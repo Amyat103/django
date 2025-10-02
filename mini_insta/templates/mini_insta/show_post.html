@@ -1,0 +1,19 @@
+<!-- mini_insta/templates/mini_insta/post.html -->
+<!-- Author: David Myat (amyat@bu.edu), 9/25/2025 -->
+<!-- Description: Show one post -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Showing Post</h1>
+
+<article>
+    <h2> Posted By: {{ post.profile.display_name }}</h2>
+    <p> Time: {{ post.timestamp }}</p>
+    <p>{{ post.caption }}</p>
+
+    <!-- display all photos for post -->
+    {{ post.get_all_photos }}
+</article>
+
+{% endblock %}

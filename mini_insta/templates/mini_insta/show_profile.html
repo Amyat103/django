@@ -20,6 +20,18 @@
                     <p>{{ profile.bio_text|linebreaks }}</p>
                 </div>
             </div>
+            {{ profile.get_all_posts }}
+            {% for post in profile.get_all_posts %}
+
+            <div>
+                <strong>
+                    by {{ post.profile.display_name }} at {{ post.timestamp }}:
+                </strong>
+                <p>
+                    {{ post.image_url}}
+                </p>
+            </div>
+            {% endfor %}
         </article>
 </main>
 

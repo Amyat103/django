@@ -2,6 +2,7 @@
 # Author: David Myat (amyat@bu.edu), 9/25/2025
 # Description: Define data models for the mini_insta project
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -20,6 +21,11 @@ class Profile(models.Model):
         """return string representation of Profile object"""
         return f"{self.username} | {self.display_name}"
 
+    def get_all_posts(self):
+        """Return QuerySet of all posts for this profile."""
+        posts = Post.objects.filter(profile=self).order_by("timestamp")
+        return posts
+
 
 class Post(models.Model):
     """Encapsulate data of a post made by a user"""
@@ -32,6 +38,24 @@ class Post(models.Model):
     def __str__(self):
         """return string representation of Post object"""
         return f"Posted by {self.profile.username} | {self.timestamp}"
+
+    def get_absolute_url(self):
+        """Return a url to display one instance of Post"""
+        return reverse("post", kwargs={"pk": self.pk})
+
+    def get_all_photos(self):
+        """Return QuerySet of all photos for this post."""
+        photos = Photo.objects.filter(post=self).order_by("timestamp")
+        return photos
+
+    def get_first_photo(self):
+        """Return first photo for a post or default image if none exists."""
+        first_photo = Photo.objects.filter(post=self).order_by("timestamp").first()
+        # return first photo or default image
+        if first_photo:
+            return first_photo.image_url
+        else:
+            return ...
 
 
 class Photo(models.Model):
