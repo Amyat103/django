@@ -37,7 +37,7 @@ class Post(models.Model):
 
     def __str__(self):
         """return string representation of Post object"""
-        return f"Posted by {self.profile.username} | {self.timestamp}"
+        return f"Posted by {self.profile.username} | {self.caption} | {self.timestamp}"
 
     def get_absolute_url(self):
         """Return a url to display one instance of Post"""
@@ -55,7 +55,7 @@ class Post(models.Model):
         if first_photo:
             return first_photo.image_url
         else:
-            return ...
+            return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
 
 
 class Photo(models.Model):
@@ -68,4 +68,4 @@ class Photo(models.Model):
 
     def __str__(self):
         """return string representation of Photo object"""
-        return f"Photo posted by {self.post.profile.username} | {self.timestamp}"
+        return f"Photo posted by {self.post.profile.username}| tied to post: {self.post} | {self.timestamp}"

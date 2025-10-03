@@ -4,6 +4,7 @@
 import random
 
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import CreatePostForm
@@ -40,6 +41,10 @@ class CreatePostView(CreateView):
 
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
+
+    def get_success_url(self):
+        """Provide a URL to redirect to after successfully creating a post."""
+        return reverse("show_post", kwargs={"pk": self.object.pk})
 
 
 class PostDetailView(DetailView):

@@ -13,7 +13,11 @@
     <p>{{ post.caption }}</p>
 
     <!-- display all photos for post -->
-    {{ post.get_all_photos }}
+    {% for photo in post.get_all_photos %}
+        <div>
+            <img src="{{ photo.image_url }}" alt="Photo for {{ post.profile.display_name }}"/>
+        </div>
+    {% endfor %}
 </article>
 
 {% endblock %}

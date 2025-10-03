@@ -9,29 +9,35 @@
 
 <main class="grid-container">
         <article class="show_profile">
-            <div>
-                <h2>{{ profile.display_name }}</h2>
-                <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
-            </div>
-            <div>
-                <div class="bio">
-                    <h3>Bio:</h3>
-                    <!-- take in bio_text and also linebreaks -->
-                    <p>{{ profile.bio_text|linebreaks }}</p>
+            <div class="profile_info">
+                <div>
+                    <h2>{{ profile.display_name }}</h2>
+                    <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
+                </div>
+                <div>
+                    <div class="bio">
+                        <h3>Bio:</h3>
+                        <!-- take in bio_text and also linebreaks -->
+                        <p>{{ profile.bio_text|linebreaks }}</p>
+                    </div>
                 </div>
             </div>
-            {{ profile.get_all_posts }}
-            {% for post in profile.get_all_posts %}
-
-            <div>
-                <strong>
-                    by {{ post.profile.display_name }} at {{ post.timestamp }}:
-                </strong>
-                <p>
-                    {{ post.image_url}}
-                </p>
+            <div class="profile_posts">
+                {% for post in profile.get_all_posts %}
+                <div class="profile_single_post">
+                    <a href="{% url 'show_post' post.pk %}">
+                        <div>
+                            <strong>
+                                {{ post.profile.display_name }}
+                                {{ post.timestamp }}
+                            </strong>
+                            <img src="{{ post.get_first_photo }}" alt="Post image">
+                            <p>{{ post.caption }}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </article>
 </main>
 
