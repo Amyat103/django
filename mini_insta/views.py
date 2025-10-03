@@ -61,7 +61,7 @@ class CreatePostView(CreateView):
         pk = self.kwargs["pk"]
         profile = Profile.objects.get(pk=pk)
         form.instance.profile = profile
-
+        self.object = form.save()
         # if there is image url in creation make object and save
         image_url = self.request.POST.get("image_url")
         if image_url:
