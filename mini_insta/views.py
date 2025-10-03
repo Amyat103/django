@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import CreatePostForm
-from .models import Post, Profile
+from .models import *
 
 
 # Create your views here.
@@ -45,6 +45,30 @@ class CreatePostView(CreateView):
     def get_success_url(self):
         """Provide a URL to redirect to after successfully creating a post."""
         return reverse("show_post", kwargs={"pk": self.object.pk})
+
+    def get_context_data(self):
+        """return context data for the template."""
+        context = super().get_context_data()
+
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+        context["profile"] = profile
+
+        return context
+
+    def form_valid(self, form):
+        """handle form submission if form is valid."""
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+        form.instance.profile = profile
+
+        # if there is image url in creation make object and save
+        image_url = self.request.POST.get("image_url")
+        if image_url:
+            photo = Photo(post=self.object, image_url=image_url)
+            photo.save()
+
+        return super().form_valid(form)
 
 
 class PostDetailView(DetailView):

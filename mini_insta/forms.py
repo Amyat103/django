@@ -13,4 +13,4 @@ class CreatePostForm(forms.ModelForm):
         """Associate this form with a model from our database."""
 
         model = Post
-        fields = ["profile", "caption"]
+        fields = ["caption"]

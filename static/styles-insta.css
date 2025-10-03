@@ -100,6 +100,7 @@ footer {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding: 10px
 }
 
 .show_profile .profile_info {
@@ -132,6 +133,20 @@ footer {
 
 .grid-container {
     background: #bed3d8;
+}
+
+.show-all-profiles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.profile_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
 }
 
 /* responsive styles: adapt to smaller screen sizes */

@@ -4,19 +4,21 @@
 {% extends 'mini_insta/base.html' %}
 
 {% block content %}
-<h1>Create a new Post</h1>
+<h1>Create a new post for {{ profile.display_name }}</h1>
 
 
-<form action="{% url 'create_post' %}" method="POST">
+<form action="{% url 'create_post' profile.pk %}" method="POST">
     {% csrf_token %}
     <table>
-    {{form.as_table}}
+        {{form.as_table}}
+        <!-- add explicit image fields -->
+        <label for="image_url">Image URL:</label>
+        <input type="url" name="image_url" id="image_url">
     </table>
-
 
     <div>
         <input type="submit" value="Submit">
-        <input type="" value="Cancel">
+        <input type="button" value="Cancel" onclick="window.history.back();">
     </div>
 </form>
 
