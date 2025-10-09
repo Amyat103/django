@@ -63,8 +63,9 @@ class Photo(models.Model):
 
     # define data attributes of the Photo model
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image_url = models.URLField()
+    image_url = models.URLField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    image_file = models.ImageField(blank=True)
 
     def __str__(self):
         """return string representation of Photo object"""

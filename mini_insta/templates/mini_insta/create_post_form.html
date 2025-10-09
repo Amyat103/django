@@ -8,12 +8,13 @@
 
 
 <form action="{% url 'create_post' profile.pk %}" method="POST">
+    enctype="multipart/form-data"
     {% csrf_token %}
     <table>
         {{form.as_table}}
         <!-- add explicit image fields -->
-        <label for="image_url">Image URL:</label>
-        <input type="url" name="image_url" id="image_url">
+        <label for="image_file">Image File:</label>
+        <input type="file" name="image_file" id="image_file">
     </table>
 
     <div>

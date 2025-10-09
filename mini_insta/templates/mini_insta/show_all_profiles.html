@@ -12,7 +12,13 @@
         <article>
             <div>
                 <a href="{% url 'profile' profile.pk %}">
+                    {% if profile.profile_image_url %}
                     <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
+                    {% elif profile.profile_image_file %}
+                    <img src="{{ profile.profile_image_file.url }}" alt="{{ profile.display_name }} profile image"/>
+                    {% else %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png" alt="No Image Placeholder"/>
+                    {% endif %}
                 </a>
                 <h2>{{ profile.display_name }}</h2>
             </div>
