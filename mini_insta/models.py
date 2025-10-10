@@ -53,7 +53,7 @@ class Post(models.Model):
         first_photo = Photo.objects.filter(post=self).order_by("timestamp").first()
         # return first photo or default image
         if first_photo:
-            return first_photo.image_url
+            return first_photo.get_image_url()
         else:
             return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
 
@@ -70,3 +70,12 @@ class Photo(models.Model):
     def __str__(self):
         """return string representation of Photo object"""
         return f"Photo posted by {self.post.profile.username}| tied to post: {self.post} | {self.timestamp}"
+
+    def get_image_url(self):
+        """Return the image URL or file URL."""
+        if self.image_url:
+            return self.image_url
+        elif self.image_file:
+            return self.image_file.url
+        else:
+            return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
