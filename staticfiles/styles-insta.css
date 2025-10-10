@@ -29,14 +29,14 @@ header {
     align-items: center;
 }
 
-.grid-container {
+/* .grid-container {
     background: #eee;
     max-width: 900px;
     display: grid;
     /* grid-template-columns: 300px 300px 300px; */
-    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat(3, 1fr);
     max-width: 1200px;
-}
+} */
 
 article.featured {
     grid-column: span 3;
@@ -80,17 +80,9 @@ footer {
 }
 
 .show_profile img {
-    height: 400px;
-    width: 600px;
+    height: 200px;
+    width: 300px;
     object-fit: cover;
-}
-
-.show_profile {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
 }
 
 .bio {
@@ -103,12 +95,71 @@ footer {
     flex-direction: row;
 }
 
-/* center all child */
-.show_profile > * {
+.show_profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px
+}
+
+.show_profile .profile_info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+}
+
+.show_profile .profile_posts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+.profile_posts a {
+    text-decoration: none;
+}
+
+.profile_single_post {
+    flex: 0 0 200px;
+    background-color: #d0e0de;
+    padding: 0 10px 0 10px;
+
+
+}
+
+.grid-container {
+    background: #bed3d8;
+}
+
+.show-all-profiles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.profile_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+}
+
+.profile_container {
+    background-color: #d6e6e5;
+    border-radius: 10px;
+    border: 5px solid #93bdb7;
+}
+
+.post_container {
+    background-color: #c0d3d1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 5px solid #a8bfbc;
 }
 
 /* responsive styles: adapt to smaller screen sizes */
