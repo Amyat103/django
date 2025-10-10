@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import *
 
-from .forms import CreatePostForm, UpdatePostForm
+from .forms import CreatePostForm, UpdatePostForm, UpdateProfileForm
 from .models import *
 
 
@@ -107,3 +107,11 @@ class DeletePostView(DeleteView):
         profile_pk = post.profile.pk
 
         return reverse("profile", kwargs={"pk": profile_pk})
+
+
+class UpdateProfileView(UpdateView):
+    """A view to handle updating an existing profile."""
+
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "mini_insta/update_profile_form.html"

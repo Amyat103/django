@@ -1,0 +1,24 @@
+<!-- mini_insta/templates/mini_insta/update_profile_form.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/10/2025 -->
+<!-- Description: Form to update a profile -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Update Profile for {{ profile.display_name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    
+    <div>
+        <input type="submit" value="Update">
+        <a href="{% url 'profile' profile.pk %}">
+            <input type="button" value="Cancel">
+        </a>
+    </div>
+</form>
+
+{% endblock %}

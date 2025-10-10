@@ -8,6 +8,9 @@
 <div class="profile_header">
     <h1>Profile: {{ profile.username }}</h1>
     <h2>
+        <a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
+    </h2>
+    <h2>
         <a href="{% url 'create_post' profile.pk %}">Create Post</a>
     </h2>
 </div>

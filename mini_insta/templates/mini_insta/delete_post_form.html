@@ -1,6 +1,6 @@
-<!-- mini_insta/templates/mini_insta/create_post_form.html -->
-<!-- Author: David Myat (amyat@bu.edu), 9/25/2025 -->
-<!-- Description: Form to create a new post -->
+<!-- mini_insta/templates/mini_insta/delete_post_form.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/10/2025 -->
+<!-- Description: Form to delete a post -->
 {% extends 'mini_insta/base.html' %}
 
 {% block content %}
@@ -18,7 +18,7 @@
 </form>
 <form action="{% url 'profile' post.profile.pk %}" method="GET">
     {% csrf_token %}
-    <input type="button" value="Cancel"">
+    <input type="button" value="Cancel">
 </form>
 
 {% endblock %}

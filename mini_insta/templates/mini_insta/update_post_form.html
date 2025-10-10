@@ -7,19 +7,20 @@
 <h1>Updating Post for {{ profile.display_name }}</h1>
 
 
-<form action="{% url 'update_post' post.pk %}" method="POST">
-    enctype="multipart/form-data"
+<form action="{% url 'update_post' post.pk %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
         {{form.as_table}}
         <!-- add explicit image fields -->
         <label for="image_file">Image File:</label>
-        <input type="file" name="image_file" id="image_file">
+        <input type="file" name="image_file" id="image_file" multiple>
     </table>
 
     <div>
         <input type="submit" value="Update">
-        <input type="button" value="Cancel" onclick="window.history.back();">
+        <a href="{% url 'show_post' post.pk %}">
+            <input type="button" value="Cancel">
+        </a>
     </div>
 </form>
 
