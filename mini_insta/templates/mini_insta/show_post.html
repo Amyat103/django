@@ -24,6 +24,10 @@
             {% endif %}
         </div>
     {% endfor %}
+
+    <h3>
+        <a href="{% url 'update_post' post.pk %}">Update Post</a>
+    </h3>
 </article>
 
 {% endblock %}

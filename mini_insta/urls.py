@@ -18,4 +18,5 @@ urlpatterns = [
         views.CreatePostView.as_view(),
         name="create_post",
     ),
+    path("post/<int:pk>/update", UpdatePostView.as_view(), name="update_post"),
 ]

@@ -14,3 +14,13 @@ class CreatePostForm(forms.ModelForm):
 
         model = Post
         fields = ["caption"]
+
+
+class UpdatePostForm(forms.ModelForm):
+    """A form to update a post in the database."""
+
+    class Meta:
+        """Associate this form with a model from our database."""
+
+        model = Post
+        fields = ["caption"]
