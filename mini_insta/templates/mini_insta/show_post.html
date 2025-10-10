@@ -8,26 +8,33 @@
 <h1>Showing Post</h1>
 
 <article>
-    <h2> Posted By: {{ post.profile.display_name }}</h2>
-    <p> Time: {{ post.timestamp }}</p>
-    <p>{{ post.caption }}</p>
+    <div class="post_container">
+        <h2> Posted By: {{ post.profile.display_name }}</h2>
+        <p> Time: {{ post.timestamp }}</p>
+        <p>{{ post.caption }}</p>
 
-    <!-- display all photos for post -->
-    {% for photo in post.get_all_photos %}
+        <!-- display all photos for post -->
+        {% for photo in post.get_all_photos %}
+            <div>
+                {% if photo.image_url %}
+                <img src="{{ photo.image_url }}" alt="Photo for {{ post.profile.display_name }}"/>
+                {% elif photo.image_file %}
+                <img src="{{ photo.image_file.url }}" alt="Photo for {{ post.profile.display_name }}"/>
+                {% else %}
+                <p>No image available</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
         <div>
-            {% if photo.image_url %}
-            <img src="{{ photo.image_url }}" alt="Photo for {{ post.profile.display_name }}"/>
-            {% elif photo.image_file %}
-            <img src="{{ photo.image_file.url }}" alt="Photo for {{ post.profile.display_name }}"/>
-            {% else %}
-            <p>No image available</p>
-            {% endif %}
+            <form action="{% url 'update_post' post.pk %}" method="GET">
+                <button type="submit">Update Post</button>
+            </form>
+            <form action="{% url 'delete_post' post.pk %}" method="GET">
+                <button type="submit">Delete Post</button>
+            </form>
         </div>
-    {% endfor %}
-
-    <h3>
-        <a href="{% url 'update_post' post.pk %}">Update Post</a>
-    </h3>
+    </div>
 </article>
 
 {% endblock %}
