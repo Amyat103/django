@@ -14,7 +14,11 @@
 
 <form method="POST">
     {% csrf_token %}
-    <button type="submit">Confirm</button>
+    <input type="submit" value="Delete">
+</form>
+<form action="{% url 'profile' post.profile.pk %}" method="GET">
+    {% csrf_token %}
+    <input type="button" value="Cancel"">
 </form>
 
 {% endblock %}

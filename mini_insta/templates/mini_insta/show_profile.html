@@ -38,6 +38,7 @@
                         </strong>
                         <img src="{{ post.get_first_photo }}" alt="Post image">
                         <p>{{ post.caption }}</p>
+                        <a href="{% url 'delete_post' post.pk %}">Delete</a>
                     </div>
                 </a>
             </div>

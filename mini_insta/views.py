@@ -96,3 +96,13 @@ class DeletePostView(DeleteView):
 
     model = Post
     template_name = "mini_insta/delete_post_form.html"
+
+    def get_success_url(self):
+        """Return the URL to redirect to after deleting a post."""
+
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+
+        profile_pk = post.profile.pk
+
+        return reverse("profile", kwargs={"pk": profile_pk})
