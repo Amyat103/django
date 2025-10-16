@@ -81,6 +81,16 @@ class Post(models.Model):
         else:
             return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
 
+    def get_all_comments(self):
+        """Return Queryset of all comments for this post."""
+        comments = Comment.objects.filter(post=self).order_by("timestamp")
+        return comments
+
+    def get_likes(self):
+        """Return Queryset of all likes on this post."""
+        likes = Like.objects.filter(post=self)
+        return likes
+
 
 class Photo(models.Model):
     """Encapsulate data of a photo in a post"""
@@ -122,3 +132,28 @@ class Follow(models.Model):
     def __str__(self):
         """return string representation of Follow object"""
         return f"{self.follower_profile.username} follows {self.profile.username}"
+
+
+class Comment(models.Model):
+    """Encapsulate data of a comment on a post."""
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+
+    def __str__(self):
+        """return string representation of Comment object"""
+        return f"{self.profile.username} Commented on {self.post} | {self.timestamp}"
+
+
+class Like(models.Model):
+    """Encapsulate data of a link on a post."""
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """return string representation of Like object"""
+        return f"{self.profile.username} Liked {self.post}"

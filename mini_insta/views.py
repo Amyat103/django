@@ -115,3 +115,43 @@ class UpdateProfileView(UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
+
+
+class ShowFollowersDetailView(DetailView):
+    """Display a single profile's followers."""
+
+    model = Profile
+    template_name = "mini_insta/show_followers.html"
+
+    def get_context_data(self):
+        """return context data for the template."""
+        context = super().get_context_data()
+
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+        context["profile"] = profile
+
+        followers = profile.get_follower()
+        context["followers"] = followers
+
+        return context
+
+
+class ShowFollowingDetailView(DetailView):
+    """Display a single profile's following."""
+
+    model = Profile
+    template_name = "mini_insta/show_following.html"
+
+    def get_context_data(self):
+        """return context data for the template."""
+        context = super().get_context_data()
+
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+        context["profile"] = profile
+
+        following = profile.get_following()
+        context["following"] = following
+
+        return context
