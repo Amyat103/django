@@ -30,6 +30,26 @@ class Profile(models.Model):
         """Return a url to display one instance of Profile"""
         return reverse("profile", kwargs={"pk": self.pk})
 
+    def get_followers(self):
+        """Return QuerySet of all followers for this profile."""
+        followers = Follow.objects.filter(profile=self)
+        return followers
+
+    def get_num_followers(self):
+        """Return number of followers for this profile."""
+        count = Follow.objects.filter(profile=self).count()
+        return count
+
+    def get_following(self):
+        """Return QuerySet of all profiles this profile is following."""
+        following = Follow.objects.filter(follower_profile=self)
+        return following
+
+    def get_num_following(self):
+        """Return number of profiles this profile is following."""
+        count = Follow.objects.filter(follower_profile=self).count()
+        return count
+
 
 class Post(models.Model):
     """Encapsulate data of a post made by a user"""
@@ -83,3 +103,22 @@ class Photo(models.Model):
             return self.image_file.url
         else:
             return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+
+
+class Follow(models.Model):
+    """Encapsulate data of a follow in profiles and posts."""
+
+    # define data attributes of the Follow model
+    # which profile is being followed
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="profile"
+    )
+    # which profile is following
+    follower_profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="follower_profile"
+    )
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """return string representation of Follow object"""
+        return f"{self.follower_profile.username} follows {self.profile.username}"
