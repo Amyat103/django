@@ -191,6 +191,7 @@ class SearchView(ListView):
 
     def dispatch(self, request, *args, **kwargs):
         """Method to handle search form."""
+        # if no query go to search form or err
         if "query" not in request.GET:
             pk = self.kwargs["pk"]
             profile = Profile.objects.get(pk=pk)
@@ -201,7 +202,6 @@ class SearchView(ListView):
 
     def get_queryset(self):
         """Return QuerySet of search."""
-
         query = self.request.GET.get("query")
         if query:
             posts = Post.objects.filter(caption__contains=query)
