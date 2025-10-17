@@ -1,0 +1,23 @@
+<!-- mini_insta/templates/mini_insta/show_follower.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/17/2025 -->
+<!-- Description: show followers of a profile -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1> {{ profile.display_name }}'s Followers</h1>
+
+<article>
+    <div class="post_container">
+
+        <!-- display all followers for profile -->
+        {% for follower in profile.get_followers %}
+            <div>
+                <p>{{ follower.follower_profile.display_name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</article>
+
+
+{% endblock %}

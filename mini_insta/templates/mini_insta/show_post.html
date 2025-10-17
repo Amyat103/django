@@ -9,8 +9,9 @@
 
 <article>
     <div class="post_container">
-        <h2> Posted By: {{ post.profile.display_name }}</h2>
-        <p> Time: {{ post.timestamp }}</p>
+        <h2> Posted By: <b>{{ post.profile.display_name }}</b></h2>
+        <p> Liked by <b>{{ post.get_likes.count }}</b> people</p>
+        <p> Time: <b>{{ post.timestamp }}</b></p>
         <p>{{ post.caption }}</p>
 
         <!-- display all photos for post -->

@@ -21,6 +21,11 @@
             <div class="profile_info">
                 <div>
                     <h2>{{ profile.display_name }}</h2>
+                    <div class="profile-count">
+                        <div> Posts: {{ profile.get_all_posts.count }}</div>
+                        <div> Followers: {{ profile.get_num_followers }}</div>
+                        <div> Following: {{ profile.get_num_following }}</div>
+                    </div>
                     <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
                 </div>
                 <div>

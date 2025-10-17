@@ -1,0 +1,23 @@
+<!-- mini_insta/templates/mini_insta/show_following.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/17/2025 -->
+<!-- Description: show profiles this profile is following -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1> {{ profile.display_name }}'s Following</h1>
+
+<article>
+    <div class="post_container">
+
+        <!-- display all profiles this profile is following -->
+        {% for following in profile.get_following %}
+            <div>
+                <p>{{ following.profile.display_name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</article>
+
+
+{% endblock %}

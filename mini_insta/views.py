@@ -131,7 +131,7 @@ class ShowFollowersDetailView(DetailView):
         profile = Profile.objects.get(pk=pk)
         context["profile"] = profile
 
-        followers = profile.get_follower()
+        followers = profile.get_followers()
         context["followers"] = followers
 
         return context
