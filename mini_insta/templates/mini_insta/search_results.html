@@ -1,0 +1,38 @@
+<!-- mini_insta/templates/mini_insta/search_results.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/17/2025 -->
+<!-- Description: Display search results -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Search Results</h1>
+
+<main>
+    <h2>Profiles matching "{{ query }}"</h2>
+    {% for profile in profiles %}
+    <article>
+        <div class="post_container">
+            <a href="{% url 'profile' profile.pk %}">
+                <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }}">
+                <h3>{{ profile.display_name }}</h3>
+                <p>@{{ profile.username }}</p>
+            </a>
+        </div>
+    </article>
+    {% endfor %}
+
+    <h2>Posts matching "{{ query }}"</h2>
+
+    {% for post in posts %}
+    <article class="post_container">
+        <a href="{% url 'show_post' post.pk %}">View Post</a>
+       <h2>Posted By: {{ post.profile.display_name }}</h2>
+       <p>Time: {{ post.timestamp }}</p>
+       <p>Liked by {{ post.get_likes.count }} people</p>
+       <img src="{{ post.get_first_photo }}" alt="Post image">
+       <p>{{ post.caption }}</p>
+    </article>
+    {% endfor %}
+</main>
+
+{% endblock %}

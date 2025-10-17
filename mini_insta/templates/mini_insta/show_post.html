@@ -27,6 +27,14 @@
             </div>
         {% endfor %}
 
+        <h3>Comments</h3>
+        {% for comment in post.get_all_comments %}
+            <div>
+                <strong>{{ comment.profile.display_name }}:</strong>
+                <p>{{ comment.text }}</p>
+            </div>
+        {% endfor %}
+
         <div>
             <form action="{% url 'update_post' post.pk %}" method="GET">
                 <button type="submit">Update Post</button>

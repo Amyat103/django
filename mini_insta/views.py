@@ -155,3 +155,79 @@ class ShowFollowingDetailView(DetailView):
         context["following"] = following
 
         return context
+
+
+class PostFeedListView(ListView):
+    """Define a view class to show feed for a profile"""
+
+    model = Post
+    template_name = "mini_insta/show_feed.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        """Return QuerySet of posts for this profile's feed."""
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+        posts = profile.get_post_feed()
+        return posts
+
+    def get_context_data(self, **kwargs):
+        """Return context data for the template."""
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+        context["profile"] = profile
+
+        return context
+
+
+class SearchView(ListView):
+    """Define a view class to search profiles and posts"""
+
+    model = Post
+    template_name = "mini_insta/search_results.html"
+    context_object_name = "posts"
+
+    def dispatch(self, request, *args, **kwargs):
+        """Method to handle search form."""
+        if "query" not in request.GET:
+            pk = self.kwargs["pk"]
+            profile = Profile.objects.get(pk=pk)
+            context = {"profile": profile}
+            return render(request, "mini_insta/search.html", context)
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        """Return QuerySet of search."""
+
+        query = self.request.GET.get("query")
+        if query:
+            posts = Post.objects.filter(caption__contains=query)
+            return posts
+        else:
+            return Post.objects.none()
+
+    def get_context_data(self, **kwargs):
+        """Return context data for the template."""
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+        context["profile"] = profile
+
+        query = self.request.GET.get("query")
+        context["query"] = query
+
+        if query:
+            profiles = (
+                Profile.objects.filter(username__contains=query)
+                | Profile.objects.filter(display_name__contains=query)
+                | Profile.objects.filter(bio_text__contains=query)
+            )
+            context["profiles"] = profiles
+        else:
+            context["profiles"] = Profile.objects.none()
+
+        return context

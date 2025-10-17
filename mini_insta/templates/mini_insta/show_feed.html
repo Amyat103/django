@@ -1,0 +1,25 @@
+<!-- mini_insta/templates/mini_insta/show_feed.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/17/2025 -->
+<!-- Description: Show the feed for a specific profile -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>{{ profile.display_name }}'s Feed</h1>
+
+<main>
+    {% for post in posts %}
+        <article class="post_container">
+            <div>
+                <a href="{% url 'show_post' post.pk %}">View Post</a><br>
+                    <img src="{{ post.get_first_photo }}" alt="Post image"/>
+                </a>
+                <p>{{ post.caption }}</p>
+                <p>Likes: {{ post.get_likes.count }}</p>
+            </div>
+        </article>
+    {% endfor %}
+
+</main>
+
+{% endblock %}

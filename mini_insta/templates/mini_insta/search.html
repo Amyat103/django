@@ -1,0 +1,19 @@
+<!-- mini_insta/templates/mini_insta/search.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/17/2025 -->
+<!-- Description: Search form for profiles and posts -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Search for profiles and posts</h1>
+
+<form method="GET" action="{% url 'search' profile.pk %}">
+        <label for="query">Search:</label>
+        <input type="text" name="query" id="query" required>
+    <div>
+        <input type="submit" value="Search">
+        <input type="button" value="Cancel" onclick="window.history.back();">
+    </div>
+</form>
+
+{% endblock %}
