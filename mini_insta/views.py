@@ -3,6 +3,9 @@
 # Description: Views for the mini_insta project
 import random
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import *
@@ -18,6 +21,12 @@ class ProfileListView(ListView):
     model = Profile
     template_name = "mini_insta/show_all_profiles.html"
     context_object_name = "profiles"
+
+    def dispatch(self, request, *args, **kwargs):
+        """Override the dispatch method to add debugging information."""
+
+        print(f"user = {request.user}")
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ProfileDetailView(DetailView):
@@ -36,11 +45,16 @@ class PostView(DetailView):
     context_object_name = "post"
 
 
-class CreatePostView(CreateView):
+class CreatePostView(LoginRequiredMixin, CreateView):
     """A view to handle creation of a new post."""
 
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
+
+    def get_login_url(self):
+        """Return URL for the app's login page."""
+
+        return reverse("login")
 
     def get_success_url(self):
         """Provide a URL to redirect to after successfully creating a post."""
@@ -231,3 +245,15 @@ class SearchView(ListView):
             context["profiles"] = Profile.objects.none()
 
         return context
+
+
+class UserRegisterView(CreateView):
+    """A view to show/process the registration to create a new user."""
+
+    form_class = UserCreationForm
+    template_name = "mini_insta/register.html"
+    model = User
+
+    def get_success_url(self):
+        """Provide a URL to redirect to after successfully registering a user."""
+        return reverse("login")

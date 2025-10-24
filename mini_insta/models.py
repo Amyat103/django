@@ -1,6 +1,7 @@
 # File: mini_insta/models.py
 # Author: David Myat (amyat@bu.edu), 9/25/2025
 # Description: Define data models for the mini_insta project
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -16,6 +17,7 @@ class Profile(models.Model):
     bio_text = models.TextField(blank=True)
     # auto set join date to current time
     join_date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """return string representation of Profile object"""

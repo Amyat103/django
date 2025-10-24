@@ -3,6 +3,7 @@
 # Description: URL routing for mini_insta project
 
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from . import views
@@ -33,4 +34,15 @@ urlpatterns = [
     ),
     path("profile/<int:pk>/feed", PostFeedListView.as_view(), name="show_feed"),
     path("profile/<int:pk>/search", SearchView.as_view(), name="search"),
+    path(
+        "login/",
+        auth_views.LoginView.as_view(template_name="mini_insta/login.html"),
+        name="login",
+    ),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(next_page="show_all_profiles"),
+        name="logout",
+    ),
+    path("register/", views.UserRegisterView.as_view(), name="register"),
 ]
