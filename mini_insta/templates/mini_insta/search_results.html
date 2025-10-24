@@ -12,7 +12,7 @@
     {% for profile in profiles %}
     <article>
         <div class="post_container">
-            <a href="{% url 'profile' profile.pk %}">
+            <a href="{% url 'show_profile' profile.pk %}">
                 <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }}">
                 <h3>{{ profile.display_name }}</h3>
                 <p>@{{ profile.username }}</p>

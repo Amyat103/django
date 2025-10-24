@@ -1,0 +1,25 @@
+<!-- mini_insta/templates/mini_insta/create_profile_form.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/24/2025 -->
+<!-- Description: Form to create a new profile -->
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+<h1>Create a new profile</h1>
+
+
+<form action="{% url 'create_profile' %}" method="POST">
+    {% csrf_token %}
+    
+    <table>
+        {{user_form.as_table}}
+    </table>
+    <table>
+        {{form.as_table}}
+    </table>
+    <div>
+        <input type="submit" value="Submit">
+        <input type="button" value="Cancel" onclick="window.history.back();">
+    </div>
+</form>
+
+{% endblock %}

@@ -11,7 +11,7 @@
     {% for profile in profiles %}
         <article>
             <div>
-                <a href="{% url 'profile' profile.pk %}">
+                <a href="{% url 'show_profile' profile.pk %}">
                     {% if profile.profile_image_url %}
                     <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }} profile image"/>
                     {% elif profile.profile_image_file %}

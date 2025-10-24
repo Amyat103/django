@@ -34,3 +34,13 @@ class UpdateProfileForm(forms.ModelForm):
 
         model = Profile
         fields = ["display_name", "bio_text", "profile_image_url"]
+
+
+class CreateProfileForm(forms.ModelForm):
+    """A form to create a profile in the database."""
+
+    class Meta:
+        """Associate this form with a model from our database."""
+
+        model = Profile
+        fields = ["display_name", "bio_text", "profile_image_url"]

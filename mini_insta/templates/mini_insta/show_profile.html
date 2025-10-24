@@ -7,12 +7,21 @@
 
 <div class="profile_header">
     <h1>Profile: {{ profile.username }}</h1>
+    {% if request.user.is_authenticated and request.user == profile.user %}
     <h2>
-        <a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
+        <a href="{% url 'update_profile' %}">Update Profile</a>
     </h2>
     <h2>
-        <a href="{% url 'create_post' profile.pk %}">Create Post</a>
+        <a href="{% url 'create_post' %}">Create Post</a>
     </h2>
+    {% elif request.user.is_authenticated %}
+    <h2>
+        <a href="{% url 'follow_profile' profile.pk %}">Follow</a>
+    </h2>
+    <h2>
+        <a href="{% url 'unfollow_profile' profile.pk %}">Unfollow</a>
+    </h2>
+    {% endif %}
 </div>
 
 <main class="grid-container">
@@ -49,7 +58,9 @@
                             </strong>
                             <img src="{{ post.get_first_photo }}" alt="Post image">
                             <p>{{ post.caption }}</p>
-                            <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                            {% if request.user.is_authenticated and request.user == post.profile.user %}
+                                <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                            {% endif %}
                         </div>
                     </a>
                 </div>

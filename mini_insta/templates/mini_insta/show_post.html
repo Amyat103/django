@@ -36,12 +36,23 @@
         {% endfor %}
 
         <div>
+        {% if request.user.is_authenticated and request.user == post.profile.user %}
             <form action="{% url 'update_post' post.pk %}" method="GET">
                 <button type="submit">Update Post</button>
             </form>
             <form action="{% url 'delete_post' post.pk %}" method="GET">
                 <button type="submit">Delete Post</button>
             </form>
+        {% elif request.user.is_authenticated %}
+            <form action="{% url 'like_post' post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Like Post</button>
+            </form>
+            <form action="{% url 'unlike_post' post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Unlike Post</button>
+                </form>
+        {% endif %}
         </div>
     </div>
 </article>

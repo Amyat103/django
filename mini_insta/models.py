@@ -30,7 +30,7 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         """Return a url to display one instance of Profile"""
-        return reverse("profile", kwargs={"pk": self.pk})
+        return reverse("show_profile", kwargs={"pk": self.pk})
 
     def get_followers(self):
         """Return QuerySet of all followers for this profile."""

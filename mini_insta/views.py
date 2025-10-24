@@ -2,15 +2,17 @@
 # Author: David Myat (amyat@bu.edu), 9/25/2025
 # Description: Views for the mini_insta project
 import random
+from multiprocessing import context
 
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import *
 
-from .forms import CreatePostForm, UpdatePostForm, UpdateProfileForm
+from .forms import CreatePostForm, CreateProfileForm, UpdatePostForm, UpdateProfileForm
 from .models import *
 
 
@@ -35,6 +37,13 @@ class ProfileDetailView(DetailView):
     model = Profile
     template_name = "mini_insta/show_profile.html"
     context_object_name = "profile"
+
+    def get_object(self):
+        """Return profile of current logged in user."""
+        if "pk" in self.kwargs:
+            return Profile.objects.get(pk=self.kwargs["pk"])
+        else:
+            return Profile.objects.get(user=self.request.user)
 
 
 class PostView(DetailView):
@@ -64,16 +73,14 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         """return context data for the template."""
         context = super().get_context_data()
 
-        pk = self.kwargs["pk"]
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         context["profile"] = profile
 
         return context
 
     def form_valid(self, form):
         """handle form submission if form is valid."""
-        pk = self.kwargs["pk"]
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         form.instance.profile = profile
         self.object = form.save()
 
@@ -94,7 +101,7 @@ class PostDetailView(DetailView):
     context_object_name = "post"
 
 
-class UpdatePostView(UpdateView):
+class UpdatePostView(LoginRequiredMixin, UpdateView):
     """A view to handle updating an existing post."""
 
     model = Post
@@ -105,8 +112,13 @@ class UpdatePostView(UpdateView):
         """Provide a URL to redirect to after successfully updating a post."""
         return reverse("show_post", kwargs={"pk": self.object.pk})
 
+    def get_login_url(self):
+        """Return URL for the app's login page."""
 
-class DeletePostView(DeleteView):
+        return reverse("login")
+
+
+class DeletePostView(LoginRequiredMixin, DeleteView):
     """A view to handle deleting an existing post."""
 
     model = Post
@@ -120,15 +132,30 @@ class DeletePostView(DeleteView):
 
         profile_pk = post.profile.pk
 
-        return reverse("profile", kwargs={"pk": profile_pk})
+        return reverse("show_profile", kwargs={"pk": profile_pk})
+
+    def get_login_url(self):
+        """Return URL for the app's login page."""
+
+        return reverse("login")
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     """A view to handle updating an existing profile."""
 
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
+
+    def get_login_url(self):
+        """Return URL for the app's login page."""
+
+        return reverse("login")
+
+    def get_object(self):
+        """Return profile of current logged in user."""
+
+        return Profile.objects.get(user=self.request.user)
 
 
 class ShowFollowersDetailView(DetailView):
@@ -137,7 +164,7 @@ class ShowFollowersDetailView(DetailView):
     model = Profile
     template_name = "mini_insta/show_followers.html"
 
-    def get_context_data(self):
+    def get_context_data(self, **kwargs):
         """return context data for the template."""
         context = super().get_context_data()
 
@@ -171,7 +198,7 @@ class ShowFollowingDetailView(DetailView):
         return context
 
 
-class PostFeedListView(ListView):
+class PostFeedListView(LoginRequiredMixin, ListView):
     """Define a view class to show feed for a profile"""
 
     model = Post
@@ -180,8 +207,7 @@ class PostFeedListView(ListView):
 
     def get_queryset(self):
         """Return QuerySet of posts for this profile's feed."""
-        pk = self.kwargs["pk"]
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         posts = profile.get_post_feed()
         return posts
 
@@ -189,14 +215,18 @@ class PostFeedListView(ListView):
         """Return context data for the template."""
         context = super().get_context_data(**kwargs)
 
-        pk = self.kwargs["pk"]
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         context["profile"] = profile
 
         return context
 
+    def get_login_url(self):
+        """Return URL for the app's login page."""
 
-class SearchView(ListView):
+        return reverse("login")
+
+
+class SearchView(LoginRequiredMixin, ListView):
     """Define a view class to search profiles and posts"""
 
     model = Post
@@ -207,8 +237,7 @@ class SearchView(ListView):
         """Method to handle search form."""
         # if no query go to search form or err
         if "query" not in request.GET:
-            pk = self.kwargs["pk"]
-            profile = Profile.objects.get(pk=pk)
+            profile = Profile.objects.get(user=self.request.user)
             context = {"profile": profile}
             return render(request, "mini_insta/search.html", context)
         else:
@@ -227,8 +256,7 @@ class SearchView(ListView):
         """Return context data for the template."""
         context = super().get_context_data(**kwargs)
 
-        pk = self.kwargs["pk"]
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
         context["profile"] = profile
 
         query = self.request.GET.get("query")
@@ -246,14 +274,143 @@ class SearchView(ListView):
 
         return context
 
+    def get_login_url(self):
+        """Return URL for the app's login page."""
 
-class UserRegisterView(CreateView):
+        return reverse("login")
+
+
+class CreateProfileView(CreateView):
     """A view to show/process the registration to create a new user."""
 
-    form_class = UserCreationForm
-    template_name = "mini_insta/register.html"
-    model = User
+    form_class = CreateProfileForm
+    template_name = "mini_insta/create_profile_form.html"
+    model = Profile
+
+    def get_context_data(self, **kwargs):
+        """Return context data for the template."""
+        context = super().get_context_data(**kwargs)
+
+        if "user_form" not in context:
+            context["user_form"] = UserCreationForm()
+
+        return context
+
+    def form_valid(self, form):
+        """Handle a valid form submission."""
+        user_form = UserCreationForm(self.request.POST)
+
+        if user_form.is_valid():
+            user = user_form.save()
+            login(
+                self.request, user, backend="django.contrib.auth.backends.ModelBackend"
+            )
+            form.instance.user = user
+
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def get_success_url(self):
         """Provide a URL to redirect to after successfully registering a user."""
+        return reverse("profile")
+
+
+class LikeView(LoginRequiredMixin, View):
+    """A view to handle liking a post."""
+
+    def get_login_url(self):
+        """Return URL for the login page."""
+
         return reverse("login")
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handle like action."""
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+
+        profile = Profile.objects.get(user=self.request.user)
+
+        if profile != post.profile:
+            seen_like = Like.objects.filter(post=post, profile=profile)
+            # like or unlike
+            if not seen_like:
+                Like.objects.create(post=post, profile=profile)
+
+        return redirect("show_post", pk=pk)
+
+
+class UnlikeView(LoginRequiredMixin, View):
+    """A view to handle unliking a post."""
+
+    def get_login_url(self):
+        """Return URL for the login page."""
+
+        return reverse("login")
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handle unlike action."""
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+
+        profile = Profile.objects.get(user=self.request.user)
+
+        if profile != post.profile:
+            seen_like = Like.objects.filter(post=post, profile=profile)
+            # unlike
+            if seen_like:
+                seen_like.delete()
+
+        return redirect("show_post", pk=pk)
+
+
+class FollowView(LoginRequiredMixin, View):
+    """A view to handle following a profile."""
+
+    def get_login_url(self):
+        """Return URL for the login page."""
+
+        return reverse("login")
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handle follow action."""
+        pk = self.kwargs["pk"]
+        profile_to_follow = Profile.objects.get(pk=pk)
+
+        logged_in = Profile.objects.get(user=self.request.user)
+
+        if logged_in != profile_to_follow:
+            seen_follow = Follow.objects.filter(
+                profile=profile_to_follow, follower_profile=logged_in
+            )
+            if not seen_follow:
+                Follow.objects.create(
+                    profile=profile_to_follow, follower_profile=logged_in
+                )
+
+        return redirect("show_profile", pk=pk)
+
+
+class UnfollowView(LoginRequiredMixin, View):
+    """A view to handle unfollowing a profile."""
+
+    def get_login_url(self):
+        """Return URL for the login page."""
+
+        return reverse("login")
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handle unfollow action."""
+        pk = self.kwargs["pk"]
+        profile_to_unfollow = Profile.objects.get(pk=pk)
+
+        logged_in = Profile.objects.get(user=self.request.user)
+
+        if logged_in != profile_to_unfollow:
+            seen_follow = Follow.objects.filter(
+                profile=profile_to_unfollow, follower_profile=logged_in
+            )
+            if seen_follow:
+                seen_follow.delete()
+
+        return redirect("show_profile", pk=pk)

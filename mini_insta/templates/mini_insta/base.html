@@ -13,17 +13,33 @@
             <h1>Mini Insta</h1>
             <nav>
                 <ul>
-                    {% if profile %}
-                        <li><a href="{% url 'show_feed' profile.pk %}">Home</a></li>
-                        <li><a href="{% url 'profile' profile.pk %}">Profile</a></li>
-                        <li><a href="{% url 'create_post' profile.pk %}">Create Post</a></li>
-                        <li><a href="{% url 'search' profile.pk %}">Search</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'show_feed' %}">Home</a></li>
+                        <li><a href="{% url 'profile' %}">Profile</a></li>
+                        <li><a href="{% url 'create_post' %}">Create Post</a></li>
+                        <li><a href="{% url 'search' %}">Search</a></li>
                     {% endif %}
                     <li><a href="{% url 'show_all_profiles' %}">All Profiles</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
                     {% else %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li>
+                        <form action="{% url 'login' %}" method="get">
+                            {% csrf_token %}
+                            <input type="submit" value="Login">
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{% url 'create_profile' %}" method="get">
+                            {% csrf_token %}
+                            <input type="submit" value="create_profile">
+                        </form>
+                    </li>
                     {% endif %}
                 </ul>
                 <hr>
