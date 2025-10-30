@@ -1,0 +1,23 @@
+<!-- voter_analytics/templates/voter_analytics/base.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/30/2025 -->
+<!-- Description: Base template for the voter_analytics app -->
+{% load static %}
+
+<html>
+    <head>
+        <title>Voter Analytics</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Voter Analytics</h1>
+            <nav>
+                <li><a href=""></a></li>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+        
+    </body>
+</html>
