@@ -5,7 +5,32 @@
 {% extends 'voter_analytics/base.html' %}
 
 {% block content %}
-<h2></h2>
+<div>
+    <h1>Showing Result for {{ voter.first_name}} {{voter.last_name}}</h1>
 
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Birth Date</th>
+            <th>Registration Date</th>
+            <th>Voted in 2020</th>
+            <th>Voted in 2021 Town Election</th>
+            <th>Voted in 2021 Primary Election</th>
+            <th>Voted in 2022 General Election</th>
+            <th>Voted in 2023 Town Election</th>
+        </tr>
+
+        <tr>
+            <td>{{ voter.first_name }} {{ voter.last_name }}</td>
+            <td>{{ voter.birth_date }}</td>
+            <td>{{ voter.registration_date }}</td>
+            <td>{{ voter.voted_2020 }}</td>
+            <td>{{ voter.voted_2021_town }}</td>
+            <td>{{ voter.voted_2021_primary }}</td>
+            <td>{{ voter.voted_2022_general }}</td>
+            <td>{{ voter.voted_2023_town }}</td>
+        </tr>
+    </table>
+</div>
 
 {% endblock %}
