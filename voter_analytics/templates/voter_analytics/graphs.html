@@ -1,0 +1,28 @@
+<!-- voter_analytics/templates/voter_analytics/graphs.html -->
+<!-- Author: David Myat (amyat@bu.edu), 10/30/2025 -->
+<!-- Description: show graphs -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<h2>Voter Analytics Graphs</h2>
+
+<div>
+    <h3>Voter Age Distribution</h3>
+    {{ graph_div_ages|safe }}
+</div>
+
+<div>
+    <h3>Voter Party Affiliation</h3>
+    {{ graph_div_parties|safe }}
+</div>
+
+<div>
+    <h3>Voter Past Participation</h3>
+    {{ graph_div_participation|safe }}
+</div>
+
+{% endblock %}
+
+
+{% endblock %}
