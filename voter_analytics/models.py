@@ -23,11 +23,13 @@ class Voter(models.Model):
     precinct_number = models.TextField()
 
     # recent voting history
-    v20state = models.TextField()
-    v21town = models.TextField()
-    v21primary = models.TextField()
-    v22general = models.TextField()
-    v23town = models.TextField()
+    v20state = models.BooleanField()
+    v21town = models.BooleanField()
+    v21primary = models.BooleanField()
+    v22general = models.BooleanField()
+    v23town = models.BooleanField()
+
+    voter_score = models.IntegerField()
 
     def __str__(self):
         """Return string representation of Voter object."""
@@ -38,6 +40,7 @@ class Voter(models.Model):
 
 def load_data():
     """Function to load data from CSV file into the Django model instance."""
+    Voter.objects.all().delete()
 
     filename = "/Users/david/Downloads/newton_voters.csv"
     f = open(filename)
@@ -58,11 +61,12 @@ def load_data():
                 registration_date=fields[8],
                 party_affiliation=fields[9],
                 precinct_number=fields[10],
-                v20state=fields[11] == fields[11],
-                v21town=fields[12] == fields[12],
-                v21primary=fields[13] == fields[13],
-                v22general=fields[14] == fields[14],
-                v23town=fields[15] == fields[15],
+                v20state=fields[11] == "TRUE",
+                v21town=fields[12] == "TRUE",
+                v21primary=fields[13] == "TRUE",
+                v22general=fields[14] == "TRUE",
+                v23town=fields[15] == "TRUE",
+                voter_score=int(fields[16]),
             )
             voter.save()
             print(f"Created voter: {voter}")
