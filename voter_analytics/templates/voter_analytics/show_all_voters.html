@@ -3,3 +3,34 @@
 <!-- Description: show all voters details -->
 
 {% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<h2>All Voters</h2>
+
+<div class="container">
+    <h1>Voters</h1>
+    <div>
+        <table>
+            <tr>
+                <th>first name</th>
+                <th>last name</th>
+            </tr>
+
+            {% for voter in voter_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'voter_detail' voter.pk %}">
+                        {{ voter.first_name }} {{ voter.last_name }}
+                    </a>
+                </td>
+                <td>
+                    {{ voter.street_name }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
