@@ -10,11 +10,35 @@
 
 <div class="container">
     <h1>Voters</h1>
+
+    <div class="row">
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li>
+                <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+            </li>
+            {% endif %}
+            <li>
+                <span>Page {{ page_obj.number}} of {{ page_obj.paginator.num_pages }}</span>
+            </li>
+            {% if page_obj.has_next %}
+            <li>
+                <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+            {% endif %}
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+
     <div>
         <table>
             <tr>
-                <th>first name</th>
-                <th>last name</th>
+                <th>Name</th>
+                <th>Street Name</th>
+                <th>Date of Birth</th>
+                <th>Party Affiliation</th>
+                <th>Voter Score</th>
             </tr>
 
             {% for voter in voter_list %}
@@ -24,9 +48,10 @@
                         {{ voter.first_name }} {{ voter.last_name }}
                     </a>
                 </td>
-                <td>
-                    {{ voter.street_name }}
-                </td>
+                <td>{{ voter.street_name}} {{voter.street_number}}</td>
+                <td>{{voter.date_of_birth}}</td>
+                <td>{{voter.party_affiliation}}</td>
+                <td>{{voter.voter_score}}</td>
             </tr>
             {% endfor %}
         </table>
