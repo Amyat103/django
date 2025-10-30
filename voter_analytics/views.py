@@ -22,7 +22,46 @@ class VoterListView(ListView):
     def get_queryset(self):
         """Return the queryset of voters."""
         qs = super().get_queryset()
+
+        party = self.request.GET.get("party_affiliation")
+        if party:
+            qs = qs.filter(party_affiliation=party)
+
+        min_birth_year = self.request.GET.get("min_birth_year")
+        if min_birth_year:
+            qs = qs.filter(date_of_birth__year__gte=min_birth_year)
+
+        max_birth_year = self.request.GET.get("max_birth_year")
+        if max_birth_year:
+            qs = qs.filter(date_of_birth__year__lte=max_birth_year)
+
+        score = self.request.GET.get("voter_score")
+        if score:
+            qs = qs.filter(voter_score=score)
+
+        if self.request.GET.get("v20state"):
+            qs = qs.filter(v20state=True)
+
+        if self.request.GET.get("v21town"):
+            qs = qs.filter(v21town=True)
+
+        if self.request.GET.get("v21primary"):
+            qs = qs.filter(v21primary=True)
+
+        if self.request.GET.get("v22general"):
+            qs = qs.filter(v22general=True)
+
+        if self.request.GET.get("v23town"):
+            qs = qs.filter(v23town=True)
+
         return qs
+
+    def get_context_data(self, **kwargs):
+        """Provide context for the template."""
+
+        context = super().get_context_data(**kwargs)
+        context["birth_years"] = range(1920, 2010)
+        return context
 
 
 class VoterDetailView(DetailView):
