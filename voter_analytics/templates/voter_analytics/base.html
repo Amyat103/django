@@ -6,13 +6,14 @@
 <html>
     <head>
         <title>Voter Analytics</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="{% static 'styles-voters.css' %}">
     </head>
     <body>
         <header>
             <h1>Voter Analytics</h1>
             <nav>
-                <li><a href=""></a></li>
+                <li><a href="{% url 'show_all_voters' %}">Show All Voters</a></li>
+                <li><a href="{% url 'graphs' %}">Show Graphs</a></li>
             </nav>
         </header>
 

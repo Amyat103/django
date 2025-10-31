@@ -8,11 +8,11 @@
 
 <h2>All Voters</h2>
 
-<div class="container">
-    <h1>Voters</h1>
+<div class="wrapper">
+    <h2>Voters</h2>
 
-    <div>
-        <form method="get" action="{% url 'show_all_voters' %}">
+    <div class="container"> 
+        <form method="get" action="{% url 'show_all_voters' %}" class="site-form">
             
             <label>Select Party Affiliation</label>
             <select name="party_affiliation">
@@ -74,7 +74,7 @@
         <ul class="pagination">
             {% if page_obj.has_previous %}
             <li>
-                <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                <span><a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Previous</a></span>
             </li>
             {% endif %}
             <li>
@@ -82,7 +82,7 @@
             </li>
             {% if page_obj.has_next %}
             <li>
-                <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                <span><a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next</a></span>
             {% endif %}
             </li>
         </ul>
@@ -99,10 +99,10 @@
                 <th>Voter Score</th>
             </tr>
 
-            {% for voter in voter_list %}
+            {% for voter in voters %}
             <tr>
                 <td>
-                    <a href="{% url 'voter_detail' voter.pk %}">
+                    <a href="{% url 'voter' voter.pk %}">
                         {{ voter.first_name }} {{ voter.last_name }}
                     </a>
                 </td>

@@ -5,7 +5,8 @@
 {% extends 'voter_analytics/base.html' %}
 
 {% block content %}
-<div>
+<div class="wrapper">
+    <div>
     <h1>Showing Result for {{ voter.first_name}} {{voter.last_name}}</h1>
 
     <table>
@@ -22,15 +23,19 @@
 
         <tr>
             <td>{{ voter.first_name }} {{ voter.last_name }}</td>
-            <td>{{ voter.birth_date }}</td>
+            <td>{{ voter.date_of_birth }}</td>
             <td>{{ voter.registration_date }}</td>
-            <td>{{ voter.voted_2020 }}</td>
-            <td>{{ voter.voted_2021_town }}</td>
-            <td>{{ voter.voted_2021_primary }}</td>
-            <td>{{ voter.voted_2022_general }}</td>
-            <td>{{ voter.voted_2023_town }}</td>
+            <td>{{ voter.v20state }}</td>
+            <td>{{ voter.v21town }}</td>
+            <td>{{ voter.v21primary }}</td>
+            <td>{{ voter.v22general }}</td>
+            <td>{{ voter.v23town }}</td>
         </tr>
     </table>
+    <div>
+        <a href="https://maps.google.com/maps?q={{ voter.street_number }}+{{ voter.street_name }}+Newton,MA+{{ voter.zip_code }}" target="_blank">View on Google Maps</a>
+    </div>
+    </div>
 </div>
 
 {% endblock %}

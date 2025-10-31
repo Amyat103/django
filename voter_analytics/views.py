@@ -71,72 +71,121 @@ class VoterDetailView(DetailView):
     model = Voter
     context_object_name = "voter"
 
+
+class GraphsView(ListView):
+    """View to display graphs."""
+
+    template_name = "voter_analytics/graphs.html"
+    model = Voter
+    context_object_name = "voters"
+
+    def get_queryset(self):
+        """Return the queryset of voters."""
+        qs = super().get_queryset()
+
+        party = self.request.GET.get("party_affiliation")
+        if party:
+            qs = qs.filter(party_affiliation=party)
+
+        min_birth_year = self.request.GET.get("min_birth_year")
+        if min_birth_year:
+            qs = qs.filter(date_of_birth__year__gte=min_birth_year)
+
+        max_birth_year = self.request.GET.get("max_birth_year")
+        if max_birth_year:
+            qs = qs.filter(date_of_birth__year__lte=max_birth_year)
+
+        score = self.request.GET.get("voter_score")
+        if score:
+            qs = qs.filter(voter_score=score)
+
+        if self.request.GET.get("v20state"):
+            qs = qs.filter(v20state=True)
+
+        if self.request.GET.get("v21town"):
+            qs = qs.filter(v21town=True)
+
+        if self.request.GET.get("v21primary"):
+            qs = qs.filter(v21primary=True)
+
+        if self.request.GET.get("v22general"):
+            qs = qs.filter(v22general=True)
+
+        if self.request.GET.get("v23town"):
+            qs = qs.filter(v23town=True)
+
+        return qs
+
     def get_context_data(self, **kwargs):
         """Provide context variable for the template."""
 
         context = super().get_context_data(**kwargs)
-        r = context["voter"]
+        voters = self.get_queryset()
+        birth_years = {}
 
-        # get data for graphs
-        year_of_birth = r.date_of_birth.year
+        for voter in voters:
+            year = voter.date_of_birth.year
+            if year not in birth_years:
+                birth_years[year] = 0
+            birth_years[year] += 1
 
-        party_affiliation = r.party_affiliation
-
-        participated_v20 = r.v20state == "Y"
-        participated_v21Town = r.v21town == "Y"
-        participated_v21Primary = r.v21primary == "Y"
-        participated_v22General = r.v22general == "Y"
-        participated_v23Town = r.v23town == "Y"
-
-        people = Voter.objects.all()
-
-        # Pie chart plot
-        pie_x = year_of_birth
-        pie_y = people
-        fig = go.Pie(labels=pie_x, values=pie_y)
-        title_text = "Voter Age Distribution"
+        y = list(birth_years.values())
+        x = list(birth_years.keys())
+        fig = go.Bar(x=x, y=y)
         graph_div_ages = plotly.offline.plot(
             {
                 "data": [fig],
-                "layout": go.Layout(title=title_text),
+                "layout": go.Layout(title="Voter Age Distribution"),
             },
             auto_open=False,
             output_type="div",
         )
         context["graph_div_ages"] = graph_div_ages
 
-        # Bar chart plot
-        bar_x = party_affiliation
-        bar_y = people
-        fig = go.Bar(labels=bar_x, values=bar_y)
-        title_text = "Voter Party Affiliation"
+        parties = {}
+        for voter in voters:
+            party = voter.party_affiliation
+            if party not in parties:
+                parties[party] = 0
+            parties[party] += 1
+
+        y = list(parties.values())
+        x = list(parties.keys())
+        fig = go.Pie(labels=x, values=y)
         graph_div_parties = plotly.offline.plot(
             {
                 "data": [fig],
-                "layout": go.Layout(title=title_text),
+                "layout": go.Layout(title="Voter Party Affiliation"),
             },
             auto_open=False,
             output_type="div",
         )
         context["graph_div_parties"] = graph_div_parties
 
-        # Histogram plot
-        his_x = [
-            participated_v20,
-            participated_v21Town,
-            participated_v21Primary,
-            participated_v22General,
-            participated_v23Town,
+        x = [
+            "v20state",
+            "v21town",
+            "v21primary",
+            "v22general",
+            "v23town",
         ]
-        his_y = people
-        fig = go.Histogram(x=his_x, y=his_y)
-        title_text = "Voter Past Participation"
+        y = [
+            voters.filter(v20state=True).count(),
+            voters.filter(v21town=True).count(),
+            voters.filter(v21primary=True).count(),
+            voters.filter(v22general=True).count(),
+            voters.filter(v23town=True).count(),
+        ]
+        fig = go.Bar(x=x, y=y)
         graph_div_participation = plotly.offline.plot(
             {
                 "data": [fig],
-                "layout": go.Layout(title=title_text),
+                "layout": go.Layout(title="Voter Past Participation"),
             },
             auto_open=False,
             output_type="div",
         )
         context["graph_div_participation"] = graph_div_participation
+        context["birth_years"] = range(1920, 2010)
+
+        return context
