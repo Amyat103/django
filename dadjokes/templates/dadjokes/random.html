@@ -1,0 +1,21 @@
+<!-- # File: dadjokes/templates/dadjokes/random.html -->
+<!-- # Author: David Myat (amyat@bu.edu), 11/13/2025 -->
+<!-- # Description: Template for displaying a random joke and picture -->
+
+{% extends "dadjokes/base.html" %}
+
+{% block content %}
+<div class="wrapper">
+    <h2>Random Dad Joke</h2>
+    <div>
+        <p>{{joke.text}}</p>
+        <p>{{joke.name}}</p>
+    </div>
+    
+    <h2>Random Silly Picture</h2>
+    <div>
+        <img src="{{picture.image_url}}" alt="Silly Picture">
+        <p>{{picture.name}}</p>
+    </div>
+</div>
+{% endblock %}

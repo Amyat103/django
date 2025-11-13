@@ -21,5 +21,10 @@ class Joke(models.Model):
 class Picture(models.Model):
     """Store the data for one silly picture/GIF."""
 
+    name = models.TextField()
     image_url = models.URLField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return string representation of Picture object."""
+        return f"{self.name}"

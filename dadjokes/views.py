@@ -41,13 +41,12 @@ def show_all_jokes(request):
     return render(request, template_name, context)
 
 
-def index_joke(request):
+def index_joke(request, index):
     """Function to get joke by primary key index."""
 
     model = Joke
     template_name = "dadjokes/index.html"
 
-    index = request.GET.get("index", 0)
     joke = model.objects.get(pk=index)
 
     context = {"joke": joke}
@@ -68,13 +67,12 @@ def show_all_pictures(request):
     return render(request, template_name, context)
 
 
-def index_picture(request):
+def index_picture(request, index):
     """Function to get picture by primary key index."""
 
     model = Picture
     template_name = "dadjokes/index.html"
 
-    index = request.GET.get("index", 0)
     picture = model.objects.get(pk=index)
 
     context = {"picture": picture}

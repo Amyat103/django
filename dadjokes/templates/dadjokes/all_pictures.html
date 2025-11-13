@@ -1,0 +1,18 @@
+<!-- # File: dadjokes/templates/dadjokes/all_pictures.html -->
+<!-- # Author: David Myat (amyat@bu.edu), 11/13/2025 -->
+<!-- # Description: Template for displaying all silly pictures -->
+
+{% extends "dadjokes/base.html" %}
+
+{% block content %}
+<div class="wrapper">
+    <h2>All Silly Pictures</h2>
+
+    {% for picture in pictures %}
+    <div class="picture-item">
+        <p>{{picture.name}}</p>
+        <img src="{{picture.image_url}}" alt="Silly Picture">
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
