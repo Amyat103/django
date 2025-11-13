@@ -10,9 +10,10 @@
 
     {% for joke in jokes %}
     <div class="joke-item">
+        <p>Name: {{joke.name}}</p>
         <p>{{joke.text}}</p>
-        <p>{{joke.name}}</p>
     </div>
+    <hr>
     {% endfor %}
 </div>
 {% endblock %}

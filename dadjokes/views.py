@@ -10,7 +10,7 @@ from .models import *
 
 
 # Create your views here.
-def random(request):
+def show_random(request):
     """Function to respond to "random" joke request that show a random joke and a random picture."""
 
     model = Joke
@@ -32,7 +32,7 @@ def show_all_jokes(request):
     """Function to respond to "jokes" request."""
 
     model = Joke
-    template_name = "dadjokes/show_all_jokes.html"
+    template_name = "dadjokes/all_jokes.html"
 
     all_jokes = model.objects.all()
 
@@ -58,7 +58,7 @@ def show_all_pictures(request):
     """Function to respond to "pictures" request."""
 
     model = Picture
-    template_name = "dadjokes/show_all_pictures.html"
+    template_name = "dadjokes/all_pictures.html"
 
     all_pictures = model.objects.all()
 

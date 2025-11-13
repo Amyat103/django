@@ -8,14 +8,14 @@
 <div class="wrapper">
     <h2>Random Dad Joke</h2>
     <div>
+        <p>Name: {{joke.name}}</p>
         <p>{{joke.text}}</p>
-        <p>{{joke.name}}</p>
     </div>
     
     <h2>Random Silly Picture</h2>
     <div>
-        <img src="{{picture.image_url}}" alt="Silly Picture">
-        <p>{{picture.name}}</p>
+        <p>Contributor: {{picture.name}}</p>
+        <img src="{{picture.image_url}}" alt="Silly Picture" style="width: 400px; height: 400px;">
     </div>
 </div>
 {% endblock %}

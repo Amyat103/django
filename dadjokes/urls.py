@@ -8,14 +8,14 @@ from . import views
 
 # URL pattern specific to the restaurant app
 urlpatterns = [
-    path("", views.random, name="random_joke"),
-    path("random/", views.random, name="random_joke"),
+    path("", views.show_random, name="random_joke"),
+    path("random/", views.show_random, name="random_joke"),
     path("jokes/", views.show_all_jokes, name="jokes"),
     path("joke/<int:index>/", views.index_joke, name="index_joke"),
     path("pictures/", views.show_all_pictures, name="pictures"),
     path("picture/<int:index>/", views.index_picture, name="index_picture"),
-    path("api/", views.random, name="random_joke"),
-    path("api/random/", views.random, name="random_joke"),
+    path("api/", views.show_random, name="random_joke"),
+    path("api/random/", views.show_random, name="random_joke"),
     path("api/jokes/", views.show_all_jokes, name="jokes"),
     path("api/joke/<int:index>/", views.index_joke, name="index_joke"),
     path("api/pictures/", views.show_all_pictures, name="pictures"),

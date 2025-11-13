@@ -10,8 +10,8 @@
 
     {% for picture in pictures %}
     <div class="picture-item">
-        <p>{{picture.name}}</p>
-        <img src="{{picture.image_url}}" alt="Silly Picture">
+        <p>Name: {{picture.name}}</p>
+        <img src="{{picture.image_url}}" alt="Silly Picture" style="width: 400px; height: 400px;">
     </div>
     {% endfor %}
 </div>
