@@ -1,5 +1,5 @@
 # File: voter_analytics/models.py
-# Author: David Myat (amyat@bu.edu), 10/28/2025
+# Author: David Myat (amyat@bu.edu), 11/13/2025
 # Description: Define data models for the voter_analytics project
 from django.db import models
 from django.urls import reverse
