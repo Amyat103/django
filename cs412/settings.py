@@ -48,9 +48,11 @@ INSTALLED_APPS = [
     "voter_analytics",
     "dadjokes",
     "rest_framework",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -155,3 +157,5 @@ if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
 # declaration to reference data models
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "media/"
+
+CORS_ALLOW_ALL_ORIGINS = True
