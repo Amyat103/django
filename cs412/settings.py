@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "dadjokes",
     "rest_framework",
     "corsheaders",
+    "betterboxd",
 ]
 
 MIDDLEWARE = [
