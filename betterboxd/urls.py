@@ -10,4 +10,13 @@ from . import views
 from .views import *
 
 # URL pattern specific to the betterboxd app
-urlpatterns = []
+urlpatterns = [
+    path("", views.home, name="home"),
+    path("profile/", views.profile, name="profile"),
+    path("movie/<int:movie_id>/", views.movie_detail, name="movie_detail"),
+    path(
+        "login/",
+        auth_views.LoginView.as_view(template_name="betterboxd/login.html"),
+        name="login",
+    ),
+]
