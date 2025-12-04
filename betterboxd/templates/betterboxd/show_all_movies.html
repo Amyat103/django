@@ -1,0 +1,23 @@
+<!-- # File: betterboxd/templates/betterboxd/show_all_movies.html -->
+<!-- # Author: David Myat (amyat@bu.edu), 12/2/2025 -->
+<!-- # Description: show all movies template for betterboxd project -->
+
+{% extends 'betterboxd/base.html' %}
+
+{% block content %}
+
+<h1>All Movies</h1>
+
+<main>
+    {% for movie in movie %}
+        <div class="profile_container">
+            <h3><a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></h3>
+            <p>Release Year: {{ movie.release_year }}</p>
+            <p>Genre: {{ movie.genre }}</p>
+            <p>Director: {{ movie.director }}</p>
+            <p>Runtime: {{ movie.runtime }}</p>
+        </div>
+    {% endfor %}
+</main>
+
+{% endblock %}

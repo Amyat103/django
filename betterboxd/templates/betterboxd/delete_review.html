@@ -1,0 +1,18 @@
+<!-- # File: betterboxd/templates/betterboxd/delete_review.html -->
+<!-- # Author: David Myat (amyat@bu.edu), 12/3/2025 -->
+<!-- # Description: Template for deleting an existing review in the betterboxd project -->
+
+{% extends 'betterboxd/base.html' %}
+
+{% block content %}
+<h2>Delete Review for {{ movie.title }}</h2>
+
+<form method="post" class="site-form">
+    {% csrf_token %}
+    <p>Are you SURE?!</p>
+    <button type="submit">Delete Review</button>
+</form>
+
+<a href="{% url 'movie_detail' pk=movie.id %}">Back</a>
+
+{% endblock %}

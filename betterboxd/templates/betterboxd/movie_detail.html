@@ -8,8 +8,27 @@
 
 <h1>Movie Detail</h1>
 
-<main>
+<div>
+    <div>
+        <h2>{{ movie.title }}</h2>
+        <p><strong>Release Year:</strong> {{ movie.release_year }}</p>
+        <p><strong>Genre:</strong> {{ movie.genre }}</p>
+        <p><strong>Director:</strong> {{ movie.director }}</p>
+        <p><strong>Runtime:</strong> {{ movie.runtime }}</p>
+        <p><strong>Description:</strong> {{ movie.description }}</p>
+    </div>
+</div>
 
-</main>
+<h3>Reviews</h3>
+<div>
+    {% for review in movie.reviews.all %}
+        <div class="review_container">
+            <p><strong>{{ review.profile.username }}:</strong> {{ review.content }}</p>
+            <p>Rating: {{ review.rating }} / 10</p>
+        </div>
+    {% empty %}
+        <p>No reviews yet. Be the first to review this movie!</p>
+    {% endfor %}
+</div>
 
 {% endblock %}
