@@ -383,6 +383,14 @@ div img {
     font-weight: bold;
 }
 
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
 /* responsive styles when width is less than 1400px */
 @media screen and (max-width: 560px) {
     header h1 {
