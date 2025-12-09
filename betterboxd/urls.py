@@ -16,13 +16,21 @@ urlpatterns = [
     path("movie/create/", CreateMovieView.as_view(), name="create_movie"),
     path("movie/<int:pk>/review/", CreateReviewView.as_view(), name="create_review"),
     path(
-        "movie/<int:pk>/review/update/",
+        "movie/<int:pk>/update/",
         UpdateReviewView.as_view(),
         name="update_review",
     ),
     path(
-        "movie/<int:pk>/review/delete/",
+        "movie/<int:pk>/delete/",
         DeleteReviewView.as_view(),
         name="delete_review",
+    ),
+    path(
+        "movie/<int:pk>/watchlist/add/", views.addToWatchlist, name="add_to_watchlist"
+    ),
+    path(
+        "movie/<int:pk>/watchlist/remove/",
+        views.removeFromWatchlist,
+        name="remove_from_watchlist",
     ),
 ]

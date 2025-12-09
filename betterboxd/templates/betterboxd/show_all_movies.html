@@ -8,7 +8,14 @@
 
 <h1>All Movies</h1>
 
-<main>
+<form method="get" class="site-form">
+    <input type="text" name="title" placeholder="Search by title">
+    <input type="text" name="genre" placeholder="Search by genre">
+    <input type="text" name="year" placeholder="Search by year">
+    <button type="submit">Search</button>
+</form>
+
+<div class="show-all-profiles">
     {% for movie in movie %}
         <div class="profile_container">
             <h3><a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></h3>
@@ -18,6 +25,6 @@
             <p>Runtime: {{ movie.runtime }}</p>
         </div>
     {% endfor %}
-</main>
+</div>
 
 {% endblock %}

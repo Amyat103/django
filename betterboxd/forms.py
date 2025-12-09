@@ -10,7 +10,15 @@ class CreateMovieForm(forms.ModelForm):
         """Associate this form with a model from our database."""
 
         model = Movie
-        fields = ["title", "year", "genre", "director", "runtime"]
+        fields = [
+            "title",
+            "year",
+            "genre",
+            "director",
+            "runtime",
+            "description",
+            "poster",
+        ]
 
 
 class CreateReviewForm(forms.ModelForm):
@@ -40,4 +48,12 @@ class UpdateMovieForm(forms.ModelForm):
         """Associate this form with a model from our database."""
 
         model = Movie
-        fields = ["title", "year", "genre", "director", "runtime"]
+        fields = [
+            "title",
+            "year",
+            "genre",
+            "director",
+            "runtime",
+            "description",
+            "poster",
+        ]

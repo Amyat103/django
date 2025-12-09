@@ -17,6 +17,19 @@ class ShowAllMovies(ListView):
     def get_queryset(self):
         """Return the queryset of movies."""
         qs = super().get_queryset()
+
+        title = self.request.GET.get("title")
+        if title:
+            qs = qs.filter(title__icontains=title)
+
+        genre = self.request.GET.get("genre")
+        if genre:
+            qs = qs.filter(genre__icontains=genre)
+
+        year = self.request.GET.get("year")
+        if year:
+            qs = qs.filter(year=year)
+
         return qs
 
 
@@ -79,3 +92,19 @@ class DeleteReviewView(CreateView):
 
     def get_success_url(self):
         return reverse("movie_detail", kwargs={"pk": self.kwargs["pk"]})
+
+
+def addToWatchlist(request, movie_id):
+    """Add a movie to the user's watchlist."""
+    movie = Movie.objects.get(id=movie_id)
+    request.user.profile.watchlist.add(movie)
+
+    return redirect("movie_detail", pk=movie_id)
+
+
+def removeFromWatchlist(request, movie_id):
+    """Remove a movie from the user's watchlist."""
+    movie = Movie.objects.get(id=movie_id)
+    request.user.profile.watchlist.remove(movie)
+
+    return redirect("movie_detail", pk=movie_id)

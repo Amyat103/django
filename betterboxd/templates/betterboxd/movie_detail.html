@@ -16,6 +16,18 @@
         <p><strong>Director:</strong> {{ movie.director }}</p>
         <p><strong>Runtime:</strong> {{ movie.runtime }}</p>
         <p><strong>Description:</strong> {{ movie.description }}</p>
+
+        <div>
+            <a href="{% url 'create_review' pk=movie.pk %}">Add a Review</a>
+        </div>
+
+        {% if user.is_authenticated %}
+            {% if movie in user.profile.watchlist.all %}
+                <a href="{% url 'remove_from_watchlist' pk=movie.pk %}">Remove from Watchlist</a>
+            {% else %}
+                <a href="{% url 'add_to_watchlist' pk=movie.pk %}">Add to Watchlist</a>
+            {% endif %}
+        {% endif %}
     </div>
 </div>
 
@@ -26,6 +38,12 @@
             <p><strong>{{ review.profile.username }}:</strong> {{ review.content }}</p>
             <p>Rating: {{ review.rating }} / 10</p>
         </div>
+        {% if review.profile == user.profile %}
+            <div>
+                <a href="{% url 'update_review' pk=movie.pk %}">Edit</a>
+                <a href="{% url 'delete_review' pk=movie.pk %}">Delete</a>
+            </div>
+        {% endif %}
     {% empty %}
         <p>No reviews yet. Be the first to review this movie!</p>
     {% endfor %}
