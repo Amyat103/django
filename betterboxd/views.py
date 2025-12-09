@@ -92,7 +92,7 @@ class CreateReviewView(CreateView):
         return context
 
     def form_valid(self, form):
-        """Validate teh form and associate movie and user."""
+        """Validate the form and associate movie and user."""
 
         movie = Movie.objects.get(pk=self.kwargs["pk"])
         form.instance.movie = movie
@@ -101,7 +101,7 @@ class CreateReviewView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        """redirect to movie detail on success."""
+        """Redirect to movie detail on success."""
 
         return reverse("movie_detail", kwargs={"pk": self.kwargs["pk"]})
 
