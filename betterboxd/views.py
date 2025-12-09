@@ -50,6 +50,7 @@ class MovieDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         """Add reviews to data and check if movie is in user's watchlist."""
+
         context = super().get_context_data(**kwargs)
         context["reviews"] = self.object.review_set.all()
 
@@ -81,15 +82,27 @@ class CreateReviewView(CreateView):
     form_class = CreateReviewForm
     template_name = "betterboxd/create_review.html"
 
+    def get_context_data(self, **kwargs):
+        """Add movie to context."""
+
+        context = super().get_context_data(**kwargs)
+        movie = Movie.objects.get(pk=self.kwargs["pk"])
+        context["movie"] = movie
+
+        return context
+
     def form_valid(self, form):
         """Validate teh form and associate movie and user."""
+
         movie = Movie.objects.get(pk=self.kwargs["pk"])
         form.instance.movie = movie
         form.instance.user = self.request.user
+
         return super().form_valid(form)
 
     def get_success_url(self):
         """redirect to movie detail on success."""
+
         return reverse("movie_detail", kwargs={"pk": self.kwargs["pk"]})
 
 
@@ -101,6 +114,8 @@ class UpdateReviewView(UpdateView):
     template_name = "betterboxd/update_review.html"
 
     def get_success_url(self):
+        """Redirect to movie detail on success."""
+
         return reverse("movie_detail", kwargs={"pk": self.kwargs["pk"]})
 
 
@@ -116,6 +131,7 @@ class DeleteReviewView(DeleteView):
 
 def addToWatchlist(request, pk):
     """Add a movie to the user's watchlist."""
+
     movie = Movie.objects.get(pk=pk)
     Watchlist.objects.get_or_create(user=request.user, movie=movie)
 
@@ -124,6 +140,7 @@ def addToWatchlist(request, pk):
 
 def removeFromWatchlist(request, pk):
     """Remove a movie from the user's watchlist."""
+
     movie = Movie.objects.get(pk=pk)
     Watchlist.objects.filter(user=request.user, movie=movie).delete()
 
@@ -138,8 +155,10 @@ class CreateUserView(CreateView):
 
     def form_valid(self, form):
         """Validate create user form"""
+
         user = form.save()
         login(self.request, user, backend="django.contrib.auth.backends.ModelBackend")
+
         return redirect("show_all_movies")
 
 

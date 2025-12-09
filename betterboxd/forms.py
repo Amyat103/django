@@ -32,7 +32,7 @@ class CreateReviewForm(forms.ModelForm):
         """Associate this form with a model from our database."""
 
         model = Review
-        fields = ["movie", "review_text", "rating"]
+        fields = ["review_text", "rating"]
 
 
 class UpdateReviewForm(forms.ModelForm):

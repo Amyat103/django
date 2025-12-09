@@ -321,6 +321,10 @@ div img {
     padding: 20px;
     background-color: aliceblue;
     border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form-box {
@@ -369,7 +373,15 @@ div img {
     border-radius: 6px;
 }
 
+.betterboxd-form {
+    display: block;
+    margin-bottom: 5px;
+}
 
+.betterboxd-form label, input {
+    display: block;
+    font-weight: bold;
+}
 
 /* responsive styles when width is less than 1400px */
 @media screen and (max-width: 560px) {

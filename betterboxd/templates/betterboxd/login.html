@@ -8,17 +8,14 @@
 
 <h1>Login to BetterBoxd</h1>
 
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Login">
-
-    {% if request.GET.next %}
-        <input type="hidden" name="next" value="{{ request.GET.next }}">
-    {% else %}
-        <input type="hidden" name="next" value="{% url 'show_all_profiles' %}">
-    {% endif %}
-</form>
+<div class="form-box">
+    <form method="post" class="site-form">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="betterboxd-button">Login</button>
+        <input type="hidden" name="next" value="{% url 'show_all_movies' %}">
+    </form>
+</div>
 
 <hr>
 Don't have an account?
