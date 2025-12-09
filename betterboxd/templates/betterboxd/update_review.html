@@ -7,12 +7,14 @@
 {% block content %}
 <h2>Update Review for {{ movie.title }}</h2>
 
-<form method="post" class="site-form">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Update Review</button>
-</form>
+<div class="form-box">
+    <form method="post" class="site-form">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="betterboxd-button">Update Review</button>
+    </form>
+</div>
 
-<a href="{% url 'movie_detail' pk=movie.pk %}">Back</a>
+<a href="{% url 'movie_detail' pk=movie.pk %}" class="betterboxd-button">Back</a>
 
 {% endblock %}

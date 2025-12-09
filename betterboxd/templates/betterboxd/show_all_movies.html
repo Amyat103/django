@@ -12,18 +12,23 @@
     <input type="text" name="title" placeholder="Search by title">
     <input type="text" name="genre" placeholder="Search by genre">
     <input type="text" name="year" placeholder="Search by year">
-    <button type="submit">Search</button>
+    <button type="submit" class="betterboxd-button">Search</button>
 </form>
 
-<div class="show-all-profiles">
+<div class="show-all-movies">
     {% for movie in movie %}
-        <div class="profile_container">
-            <h3><a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></h3>
-            <p>Release Year: {{ movie.release_year }}</p>
-            <p>Genre: {{ movie.genre }}</p>
-            <p>Director: {{ movie.director }}</p>
-            <p>Runtime: {{ movie.runtime }}</p>
-        </div>
+        <!-- <a href="{% url 'movie_detail' movie.id %}" class="movie-link"> -->
+            <div class="movie-box">
+                {% if movie.poster %}
+                    <img src="{{ movie.poster }}" alt="{{ movie.title }} Poster" class="movie-poster">
+                {% endif %}
+                <h3><a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></h3>
+                <p><strong>Release Year:</strong> {{ movie.year }}</p>
+                <p><strong>Genre:</strong> {{ movie.genre }}</p>
+                <p><strong>Director:</strong> {{ movie.director }}</p>
+                <p><strong>Runtime:</strong> {{ movie.runtime }} minutes</p>
+            </div>
+        <!-- </a> -->
     {% endfor %}
 </div>
 

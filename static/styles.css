@@ -1,7 +1,8 @@
 body {
     background-color: #fff;
-    color: slategray;
+    color: black;
     font-family: arial;
+    margin-top: 35px
 }
 
 h1,h2,h3,h4,h5{
@@ -11,7 +12,7 @@ h1,h2,h3,h4,h5{
 }
 
 a, a:visited {
-    color: slategrey;
+    color: black;
     text-decoration: none;
 }
 
@@ -98,7 +99,7 @@ nav li {
 
 nav button {
     background: none;
-    color: slategray;
+    color: black;
     font-family: Arial;
     cursor: pointer; 
     border: 0;
@@ -308,6 +309,66 @@ div img {
     color: black
 }
 
+.show-all-movies {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.movie-box {
+    border: 2px solid darkblue;
+    padding: 20px;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.form-box {
+    max-width: 500px;
+    padding: 20px;
+    margin: 20px auto;
+    background: aliceblue;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.movie-poster {
+    width: 300px;
+    height: 300px;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+.movie-button {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.review-box {
+    border: 1px solid darkblue;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.movie-link {
+    text-decoration: none;
+}
+
+.betterboxd-button {
+    padding: 5px 10px;
+    border: 3px solid darkblue;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 6px;
+}
+
 
 
 /* responsive styles when width is less than 1400px */
@@ -325,7 +386,7 @@ div img {
     
     nav button {
         background: none;
-        color: slategray;
+        color: black;
         font-family: Arial;
         cursor: pointer; 
         border: 0;

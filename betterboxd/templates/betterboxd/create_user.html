@@ -1,0 +1,22 @@
+<!-- betterboxd/templates/betterboxd/create_user.html -->
+<!-- Author: David Myat (amyat@bu.edu), 12/9/2025 -->
+<!-- Description: Form to register a new user -->
+
+{% extends 'betterboxd/base.html' %}
+
+{% block content %}
+
+<h2>Create New User</h2>
+
+<div class="form-box">
+    <form method="post" class="site-form">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="betterboxd-button">Create User</button>
+    </form>
+</div>
+
+
+<p>Already registered?</p> <a href="{% url 'login' %}" class="betterboxd-button">Log in here</a>
+
+{% endblock %}

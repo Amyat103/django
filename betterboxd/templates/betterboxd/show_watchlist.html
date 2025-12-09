@@ -1,0 +1,28 @@
+<!-- # File: betterboxd/templates/betterboxd/show_watchlist.html -->
+<!-- # Author: David Myat (amyat@bu.edu), 12/9/2025 -->
+<!-- # Description: Show user's watchlist movies -->
+
+{% extends 'betterboxd/base.html' %}
+
+{% block content %}
+
+<h2>{{ user.username }}'s Watchlist</h2>
+
+<div class="show-all-movies">
+    {% for movie in watchlist_movies %}
+        <div class="movie-box">
+            {% if movie.poster %}
+                <img src="{{ movie.poster }}" class="movie-poster">
+            {% endif %}
+            <h3><a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></h3>
+            <p><strong>Year:</strong> {{ movie.year }}</p>
+            <p><strong>Genre:</strong> {{ movie.genre }}</p>
+            <p><strong>Director:</strong> {{ movie.director }}</p>
+            <p><strong>Runtime:</strong> {{ movie.runtime }} minutes</p>
+        </div>
+    {% empty %}
+        <p>No movie in watchlist, add more in home page</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

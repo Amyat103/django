@@ -1,3 +1,7 @@
+# File: betterboxd/forms.py
+# Author: David Myat (amyat@bu.edu), 12/9/2025
+# Description: Forms for creating and updating movies and reviews in BetterBoxd
+
 from django import forms
 
 from .models import Movie, Review

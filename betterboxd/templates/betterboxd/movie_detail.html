@@ -9,39 +9,42 @@
 <h1>Movie Detail</h1>
 
 <div>
-    <div>
+    <div class="movie-box">
+        {% if movie.poster %}
+            <img src="{{ movie.poster }}" alt="{{ movie.title }} Poster" class="movie-poster">
+        {% endif %}
         <h2>{{ movie.title }}</h2>
-        <p><strong>Release Year:</strong> {{ movie.release_year }}</p>
+        <p><strong>Release Year:</strong> {{ movie.year }}</p>
         <p><strong>Genre:</strong> {{ movie.genre }}</p>
         <p><strong>Director:</strong> {{ movie.director }}</p>
-        <p><strong>Runtime:</strong> {{ movie.runtime }}</p>
+        <p><strong>Runtime:</strong> {{ movie.runtime }} minutes</p>
         <p><strong>Description:</strong> {{ movie.description }}</p>
 
-        <div>
-            <a href="{% url 'create_review' pk=movie.pk %}">Add a Review</a>
-        </div>
-
-        {% if user.is_authenticated %}
-            {% if movie in user.profile.watchlist.all %}
-                <a href="{% url 'remove_from_watchlist' pk=movie.pk %}">Remove from Watchlist</a>
-            {% else %}
-                <a href="{% url 'add_to_watchlist' pk=movie.pk %}">Add to Watchlist</a>
+        <div class="movie-button">
+            <a href="{% url 'create_review' pk=movie.pk %}" class="betterboxd-button">Add a Review</a>
+            {% if user.is_authenticated %}
+                {% if is_in_watchlist %}
+                    <a href="{% url 'remove_from_watchlist' pk=movie.pk %}" class="betterboxd-button">Remove from Watchlist</a>
+                {% else %}
+                    <a href="{% url 'add_to_watchlist' pk=movie.pk %}" class="betterboxd-button">Add to Watchlist</a>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </div>
 </div>
 
 <h3>Reviews</h3>
-<div>
-    {% for review in movie.reviews.all %}
-        <div class="review_container">
-            <p><strong>{{ review.profile.username }}:</strong> {{ review.content }}</p>
-            <p>Rating: {{ review.rating }} / 10</p>
+<div class="reviews-section">
+    {% for review in movie.review_set.all %}
+        <div class="review-box">
+            <p><strong>{{ review.user.username }}</strong></p>
+            <p>{{ review.review_text }}</p>
+            <p>Rating: {{ review.rating }} / 5 ⭐</p>
         </div>
-        {% if review.profile == user.profile %}
+        {% if user.is_authenticated and review.user == user %}
             <div>
-                <a href="{% url 'update_review' pk=movie.pk %}">Edit</a>
-                <a href="{% url 'delete_review' pk=movie.pk %}">Delete</a>
+                <a href="{% url 'update_review' pk=review.pk %}" class="betterboxd-button">Edit</a>
+                <a href="{% url 'delete_review' pk=review.pk %}" class="betterboxd-button">Delete</a>
             </div>
         {% endif %}
     {% empty %}

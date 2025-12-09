@@ -1,3 +1,7 @@
+# File: betterboxd/models.py
+# Author: David Myat (amyat@bu.edu), 12/9/2025
+# Description: Models for movies, reviews, and watchlists in BetterBoxd app
+
 from django.contrib.auth.models import User
 from django.db import models
 

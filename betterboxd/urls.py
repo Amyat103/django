@@ -12,9 +12,11 @@ from .views import *
 # URL pattern specific to the betterboxd app
 urlpatterns = [
     path("", ShowAllMovies.as_view(), name="show_all_movies"),
-    path("movie/<int:pk>/", ShowMovieDetail.as_view(), name="movie_detail"),
+    path("movie/<int:pk>/", MovieDetailView.as_view(), name="movie_detail"),
     path("movie/create/", CreateMovieView.as_view(), name="create_movie"),
-    path("movie/<int:pk>/review/", CreateReviewView.as_view(), name="create_review"),
+    path(
+        "movie/<int:pk>/review/create", CreateReviewView.as_view(), name="create_review"
+    ),
     path(
         "movie/<int:pk>/update/",
         UpdateReviewView.as_view(),
@@ -33,4 +35,16 @@ urlpatterns = [
         views.removeFromWatchlist,
         name="remove_from_watchlist",
     ),
+    path(
+        "login/",
+        auth_views.LoginView.as_view(template_name="betterboxd/login.html"),
+        name="login",
+    ),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(next_page="show_all_movies"),
+        name="logout",
+    ),
+    path("register/", CreateUserView.as_view(), name="create_user"),
+    path("watchlist/", ShowWatchlistView.as_view(), name="watchlist"),
 ]

@@ -12,8 +12,19 @@
         <header>
             <h1>BetterBoxd</h1>
             <nav>
-                <li><a href="{% url 'show_all_movies' %}">Home</a></li>
-                <li><a href="{% url 'create_movie' %}">Add Movie</a></li>
+                <li><a href="{% url 'show_all_movies' %}" class="betterboxd-button">Home</a></li>
+                <li><a href="{% url 'create_movie' %}" class="betterboxd-button">Add Movie</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'watchlist' %}" class="betterboxd-button">Watchlist</a></li>
+                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="betterboxd-button">Logout</button>
+                    </form>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="betterboxd-button">Login</a></li>
+                    <li><a href="{% url 'create_user' %}" class="betterboxd-button">Register</a></li>
+                {% endif %}
             </nav>
         </header>
 
